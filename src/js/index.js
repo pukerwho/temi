@@ -1,0 +1,14 @@
+import "../css/main.scss";
+import "../../node_modules/jquery-ui/dist/jquery-ui.min.js";
+import "./scripts.js";
+import "./filters.js";
+import "./tabs.js";
+import "./tasks/task-accept.js";
+import "./tasks/task-delivery.js";
+import "./tasks/task-author.js";
+import "./tasks/task-pay.js";
+import "./tasks/task-complete.js";
+import "./tasks/task-link.js";
+import "./websites/sort-table.js";
+import "./websites/chart.js";
+import "./websites/edit.js";

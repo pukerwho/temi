@@ -62,7 +62,7 @@ $current_user_id = get_current_user_id();
               <option value="All">Оберіть автора</option>
               <?php 
               $article_author = !empty( $_GET['article_author'] ) ? $_GET['article_author'] : '';
-              $all_authors = ["Кузмицька Ана-Катаріна","Каріна Туленіна","Анастасія Можаровська","Єлизавета Будас","Валерія Ліпська","Єсенія Буксіна"];
+              $all_authors = ["Ана-Катаріна Кузмицька","Каріна Туленіна","Анастасія Можаровська","Єлизавета Будас","Валерія Ліпська","Єсенія Буксіна"];
               foreach ($all_authors as $author):
               ?>
                 <option value="<?php echo $author; ?>" <?php echo $article_author == $author ? 'selected' : ''; ?>><?php echo $author; ?></option>
@@ -95,7 +95,13 @@ $current_user_id = get_current_user_id();
         </tr>
       </thead>
       <tbody id="response" class="text-sm">
-        <?php $new_posts = new WP_Query( array( 'post_type' => 'articles', 'posts_per_page' => -1));
+        <?php $new_posts = new WP_Query( array( 
+          'post_type' => 'articles', 
+          'posts_per_page' => -1,
+          'meta_key' => '_crb_article_date',
+          'orderby' => 'meta_value_num',
+          'order' => 'DESC'
+        ));
           if ($new_posts->have_posts()) : while ($new_posts->have_posts()) : $new_posts->the_post(); 
         ?>
           <?php get_template_part('template-parts/article-item-table'); ?>

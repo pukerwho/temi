@@ -1,9 +1,10 @@
 <?php 
 get_header(); 
 $current_user_id = get_current_user_id();
+
 ?>
 
-<?php if ($current_user_id === 1): ?>
+<?php if ($current_user_id === 1 || $current_user_id === 2): ?>
 
 <div class="py-12">
   <div class="mx-auto max-w-7xl rounded-xl bg-white shadow-xl">
@@ -99,7 +100,7 @@ $current_user_id = get_current_user_id();
           'post_type' => 'articles', 
           'posts_per_page' => -1,
           'meta_key' => '_crb_article_date',
-          'orderby' => 'meta_value_num',
+          'orderby' => 'meta_value',
           'order' => 'DESC'
         ));
           if ($new_posts->have_posts()) : while ($new_posts->have_posts()) : $new_posts->the_post(); 

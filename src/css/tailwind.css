@@ -18,7 +18,7 @@ body {
 a {
   @apply text-main-blue;
 }
-.tab.active {
+.menu.active {
   @apply bg-gray-100 rounded-lg
 }
 .header .top-menu {

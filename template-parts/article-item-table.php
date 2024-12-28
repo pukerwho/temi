@@ -6,7 +6,6 @@
   <!-- Назва статті -->
   <td class="border-r p-4">
     <div class="max-w-[380px] flex items-center whitespace-nowrap text-ellipsis overflow-hidden gap-2">
-      <div class="w-[8px] min-w-[8px] h-[8px] min-h-[8px] bg-green-500 rounded-full"></div>
       <div class="relative text-blue-500 text-ellipsis overflow-hidden whitespace-nowrap flex items-center">
         <a href="<?php echo carbon_get_the_post_meta('crb_article_link'); ?>" target="_blank" class="w-full h-full absolute top-0 left-0 z-1"></a>
         <div class="mr-1">
@@ -34,6 +33,26 @@
     </span>
   </td>
   <!-- END Сайт -->
+  <!-- Показники -->
+  <td class="border-r whitespace-nowrap p-4">
+    <div class="flex items-center gap-2">
+      <div class="flex items-center">
+        <div class="w-[9px] h-[9px] bg-orange-300 rounded-full mr-1"></div>
+        <div class="mr-2"><?php echo carbon_get_the_post_meta('crb_article_ahrefs'); ?></div>
+        <div class="text-gray-400">|</div>
+      </div>
+      <div class="flex items-center">
+        <div class="w-[9px] h-[9px] bg-sky-300 rounded-full mr-1"></div>
+        <div class="mr-2"><?php echo carbon_get_the_post_meta('crb_article_google_click'); ?></div>
+        <div class="text-gray-400">|</div>
+      </div>
+      <div class="flex items-center">
+        <div class="w-[9px] h-[9px] bg-purple-300 rounded-full mr-1"></div>
+        <div class=""><?php echo carbon_get_the_post_meta('crb_article_google_views'); ?></div>
+      </div>
+    </div>
+  </td>
+  <!-- END Показники -->
   <!-- Дата -->
   <td class="border-r whitespace-nowrap p-4">
     <div class="">

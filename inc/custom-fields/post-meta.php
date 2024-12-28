@@ -14,6 +14,9 @@ function crb_post_theme_options() {
       Field::make( 'text', 'crb_article_author', 'Автор' ),
       Field::make( 'text', 'crb_article_link', 'Посилання' ),
       Field::make( 'text', 'crb_article_keywords', 'Ключові посилання' ),
+      Field::make( 'text', 'crb_article_ahrefs', 'Keywords' ),
+      Field::make( 'text', 'crb_article_google_click', 'Кліки' ),
+      Field::make( 'text', 'crb_article_google_views', 'Покази' ),
   ) );
   Container::make( 'post_meta', 'More' )
     ->where( 'post_type', '=', 'websites' )

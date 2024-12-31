@@ -293,4 +293,36 @@ function update_params_field_programmatic() {
   }
 }
 
+function get_cached_articles() {
+  // Унікальний ключ для транзієнта
+  $transient_key = 'cached_articles_query';
+  
+  // Спробувати отримати кешований результат
+  $query_results = get_transient( $transient_key );
+
+  if ( false === $query_results ) {
+      // Якщо кешу немає, виконати запит
+      $args = array(
+        'post_type' => 'articles', 
+        'posts_per_page' => -1,
+        'order' => 'DESC',
+        'fields' => 'ids'
+      );
+
+      $query_results = new WP_Query( $args );
+
+      // Зберегти результат у транзієнт на 1 годину
+      set_transient( $transient_key, $query_results, HOUR_IN_SECONDS );
+  }
+
+  return $query_results;
+}
+
+function clear_articles_cache() {
+  delete_transient( 'cached_articles_query' );
+}
+add_action( 'save_post_articles', 'clear_articles_cache' ); // Очищення при збереженні запису
+add_action( 'delete_post', 'clear_articles_cache' ); // Очищення при видаленні запису
+
 // update_params_field_programmatic();
+

@@ -118,17 +118,13 @@ $current_user_id = get_current_user_id();
         </tr>
       </thead>
       <tbody id="response" class="text-sm">
-        <?php $new_posts = new WP_Query( array( 
-          'post_type' => 'articles', 
-          'posts_per_page' => -1,
-          'meta_key' => '_crb_article_date',
-          'orderby' => 'meta_value',
-          'order' => 'DESC'
-        ));
+        <?php 
+          $new_posts = get_cached_articles();
           if ($new_posts->have_posts()) : while ($new_posts->have_posts()) : $new_posts->the_post(); 
         ?>
           <?php get_template_part('template-parts/article-item-table'); ?>
         <?php endwhile; endif; wp_reset_postdata(); ?>
+        
       </tbody>
     </table>
   </div>

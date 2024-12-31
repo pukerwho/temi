@@ -34,6 +34,7 @@ function justread_filter_achive( $query ) {
   ));
   $query->set('meta_key', $filter_article_orderby);
   $query->set('orderby', 'meta_value_num');
+  clear_articles_cache();
   return $query;
 }
 add_action( 'pre_get_posts','justread_filter_achive');

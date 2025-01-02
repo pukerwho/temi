@@ -278,21 +278,6 @@ function site_bg_color($site) {
   return 'bg-gray-100'; 
 }
 
-function update_params_field_programmatic() {
-  $postType = 'articles';
-  $newValue = '';
-  $args = [ 'post_type' => $postType, 'posts_per_page' => -1, 'fields' => 'ids'];
-  $posts = get_posts($args);
-  foreach ( $posts as $post ) {
-    if ( metadata_exists( 'post', $post, '_crb_article_google_click' ) ) {
-      update_post_meta( $post, '_crb_article_google_click', '' );
-    } 
-    if ( metadata_exists( 'post', $post, '_crb_article_google_views' ) ) {
-      update_post_meta( $post, '_crb_article_google_views', '' );
-    } 
-  }
-}
-
 function get_cached_articles() {
   // Унікальний ключ для транзієнта
   $transient_key = 'cached_articles_query';
@@ -324,5 +309,23 @@ function clear_articles_cache() {
 add_action( 'save_post_articles', 'clear_articles_cache' ); // Очищення при збереженні запису
 add_action( 'delete_post', 'clear_articles_cache' ); // Очищення при видаленні запису
 
-// update_params_field_programmatic();
+
+function update_params_field_programmatic() {
+  $postType = 'articles';
+  $newValue = '';
+  $args = [ 'post_type' => $postType, 'posts_per_page' => -1, 'fields' => 'ids'];
+  $posts = get_posts($args);
+  foreach ( $posts as $post ) {
+    if ( !metadata_exists( 'post', $post, '_crb_article_ahrefs' ) ) {
+      update_post_meta( $post, '_crb_article_ahrefs', '' );
+    } 
+    if ( !metadata_exists( 'post', $post, '_crb_article_google_click' ) ) {
+      update_post_meta( $post, '_crb_article_google_click', '' );
+    } 
+    if ( !metadata_exists( 'post', $post, '_crb_article_google_views' ) ) {
+      update_post_meta( $post, '_crb_article_google_views', '' );
+    } 
+  }
+}
+update_params_field_programmatic();
 

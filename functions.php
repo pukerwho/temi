@@ -316,16 +316,16 @@ function update_params_field_programmatic() {
   $args = [ 'post_type' => $postType, 'posts_per_page' => -1, 'fields' => 'ids'];
   $posts = get_posts($args);
   foreach ( $posts as $post ) {
-    if ( metadata_exists( 'post', $post, '_crb_article_ahrefs' ) ) {
+    if ( !metadata_exists( 'post', $post, '_crb_article_ahrefs' ) ) {
       update_post_meta( $post, '_crb_article_ahrefs', '' );
     } 
-    if ( metadata_exists( 'post', $post, '_crb_article_google_click' ) ) {
+    if ( !metadata_exists( 'post', $post, '_crb_article_google_click' ) ) {
       update_post_meta( $post, '_crb_article_google_click', '' );
     } 
-    if ( metadata_exists( 'post', $post, '_crb_article_google_views' ) ) {
+    if ( !metadata_exists( 'post', $post, '_crb_article_google_views' ) ) {
       update_post_meta( $post, '_crb_article_google_views', '' );
     } 
   }
 }
-update_params_field_programmatic();
+// update_params_field_programmatic();
 

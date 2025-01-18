@@ -327,5 +327,5 @@ function update_params_field_programmatic() {
     } 
   }
 }
-// update_params_field_programmatic();
+update_params_field_programmatic();
 

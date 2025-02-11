@@ -27,7 +27,7 @@ function justread_filter_achive( $query ) {
   if (isset($_GET['article_perpage'])) {
     $filter_article_perpage = $_GET['article_perpage'];
   } else {
-    $filter_article_perpage = 1;
+    $filter_article_perpage = 20;
   }
   $query->set('meta_query',  array(
     'relation' => 'AND',

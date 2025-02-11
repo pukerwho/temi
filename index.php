@@ -106,15 +106,15 @@ $current_user_id = get_current_user_id();
               $all_perpage = [
                 [
                   "name" => "По 20 на сторінку",
-                  "key" => 1,
+                  "key" => 20,
                 ],
                 [
                   "name" => "По 50 на сторінку",
-                  "key" => 2,
+                  "key" => 50,
                 ],
                 [
                   "name" => "По 100 на сторінку",
-                  "key" => 3,
+                  "key" => 100,
                 ],
                 [
                   "name" => "Всі статті",
@@ -152,10 +152,10 @@ $current_user_id = get_current_user_id();
         <?php 
           // $new_posts = get_cached_articles();
           global $wp_query, $wp_rewrite;  
-          $wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
+          $wp_query->query_vars['page'] > 1 ? $current = $wp_query->query_vars['page'] : $current = 1;
           $new_posts = new WP_Query( array(
             'post_type' => 'articles', 
-            'posts_per_page' => 1,
+            'posts_per_page' => 20,
             'order' => 'DESC',
             'fields' => 'ids',
             'paged' => $current, 

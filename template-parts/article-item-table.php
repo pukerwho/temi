@@ -4,7 +4,7 @@
 ?>
 <tr class="border-b search_articles_line" data-metadata='{"name": "website","category": "site","tag": ["<?php echo htmlspecialchars($title,ENT_QUOTES); ?>", "<?php echo htmlspecialchars($keywords, ENT_QUOTES); ?>"]}'>
   <!-- Назва статті -->
-  <td class="border-r p-4">
+  <td class="border-r p-2">
     <div class="max-w-[380px] flex items-center whitespace-nowrap text-ellipsis overflow-hidden gap-2">
       <div class="relative text-blue-500 text-ellipsis overflow-hidden whitespace-nowrap flex items-center">
         <a href="<?php echo carbon_get_the_post_meta('crb_article_link'); ?>" target="_blank" class="w-full h-full absolute top-0 left-0 z-1"></a>
@@ -17,12 +17,12 @@
   </td>
   <!-- END Назва статті -->
   <!-- Автор -->
-  <td class="border-r whitespace-nowrap p-4">
+  <td class="border-r whitespace-nowrap p-2">
     <span class=""><?php echo carbon_get_the_post_meta('crb_article_author'); ?></span>
   </td>
   <!-- END Автор -->
   <!-- Сайт -->
-  <td class="border-r whitespace-nowrap p-4">
+  <td class="border-r whitespace-nowrap p-2">
     <?php  
       $article_site = carbon_get_the_post_meta('crb_article_site');
       $site_text_color = site_text_color($article_site);
@@ -34,7 +34,7 @@
   </td>
   <!-- END Сайт -->
   <!-- Показники -->
-  <td class="border-r whitespace-nowrap p-4">
+  <td class="border-r whitespace-nowrap p-2">
     <div class="flex items-center gap-2">
       <div class="flex items-center">
         <div class="w-[9px] h-[9px] bg-orange-300 rounded-full mr-1"></div>
@@ -54,14 +54,14 @@
   </td>
   <!-- END Показники -->
   <!-- Дата -->
-  <td class="border-r whitespace-nowrap p-4">
+  <td class="border-r whitespace-nowrap p-2">
     <div class="">
       <?php echo carbon_get_the_post_meta('crb_article_date'); ?>
     </div>
   </td>
   <!-- END Дата -->
   <!-- Keywords -->
-  <td class="p-4">
+  <td class="p-2">
     <div class="max-w-[200px] flex items-center relative text-ellipsis overflow-hidden whitespace-nowrap cursor-pointer copy-click" data-clipboard-text="<?php echo $keywords; ?>" data-copy-text="<?php echo $keywords; ?>">
       <div class="copy-tooltip hidden absolute -top-[4px] left-0 bg-black/80 text-white rounded text-center px-2 py-1" data-copy-text="<?php echo $keywords; ?>">Скопійовано 🙂</div>
       <div class="mr-1"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="16px" fill="currentColor"><path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/></svg></div>  

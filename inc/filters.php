@@ -24,6 +24,11 @@ function justread_filter_achive( $query ) {
       $filter_article_orderby = $_GET['article_orderby'];
     }
   }
+  if (isset($_GET['article_perpage'])) {
+    $filter_article_perpage = $_GET['article_perpage'];
+  } else {
+    $filter_article_perpage = 1;
+  }
   $query->set('meta_query',  array(
     'relation' => 'AND',
     array(
@@ -34,6 +39,7 @@ function justread_filter_achive( $query ) {
   ));
   $query->set('meta_key', $filter_article_orderby);
   $query->set('orderby', 'meta_value_num');
+  $query->set('posts_per_page', $filter_article_perpage);
   clear_articles_cache();
   return $query;
 }

@@ -78,10 +78,12 @@ function crb_load() {
     require_once get_template_directory() . '/inc/custom-fields/page-meta.php';
     require_once get_template_directory() . '/inc/custom-fields/term-meta.php';
     require_once get_template_directory() . '/inc/custom-fields/comment-meta.php';
+    require_once get_template_directory() . '/inc/custom-fields/user-meta.php';
     require_once get_template_directory() . '/inc/custom-fields/gutenberg-blocks.php';
 }
 
 require_once get_template_directory() . '/inc/filters.php';
+require_once get_template_directory() . '/inc/tasks/tasks.php';
 
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
@@ -164,8 +166,44 @@ function create_post_type() {
       'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'custom-fields', 'revisions' ),
     )
   );
+  register_post_type( 'tasks',
+    array(
+      'labels' => array(
+          'name' => __( 'Завдання' ),
+          'singular_name' => __( 'Завдання' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+      'hierarchical' => true,
+      'show_in_rest' => false,
+      'menu_icon' => 'dashicons-megaphone',
+      'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'custom-fields', 'revisions' ),
+    )
+  );
 }
 add_action( 'init', 'create_post_type' );
+
+function get_page_url($template_name) {
+  $pages = get_posts([
+    'post_type' => 'page',
+    'post_status' => 'publish',
+    'meta_query' => [
+      [
+        'key' => '_wp_page_template',
+        'value' => $template_name.'.php',
+        'compare' => '='
+      ]
+    ]
+  ]);
+  if(!empty($pages))
+  {
+    foreach($pages as $pages__value)
+    {
+      return get_permalink($pages__value->ID);
+    }
+  }
+  return get_bloginfo('url');
+}
 
 function get_site($site) {
   $site = str_replace( array('http://', 'https://', '/'), '', $site );
@@ -313,6 +351,20 @@ add_action( 'save_post_articles', 'clear_articles_cache' ); // Очищення 
 add_action( 'delete_post', 'clear_articles_cache' ); // Очищення при видаленні запису
 
 
+//update date
+function update_date_format() {
+  $postType = 'articles';
+  $args = [ 'post_type' => $postType, 'posts_per_page' => -1, 'fields' => 'ids'];
+  $posts = get_posts($args);
+  foreach ( $posts as $post ) {
+    $date = get_post_meta($post, '_crb_article_date', true); 
+    if ($date) {
+      $date = strtotime($date);
+      update_post_meta($post, '_crb_article_date', $date);
+    }
+  }
+}
+// update_date_format();
 function update_params_field_programmatic() {
   $postType = 'articles';
   $newValue = '';

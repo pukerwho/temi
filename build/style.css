@@ -37,3 +37,30 @@
 .text-balance {
   text-wrap: balance;
 }
+
+.resizer {
+  width: 5px;
+  height: 100%;
+  background: #ccc;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: ew-resize;
+  user-select: none;
+}
+
+.tasks table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tasks th,
+.tasks td {
+  text-align: left;
+  white-space: nowrap;
+  /* Запобігає переносу тексту */
+}
+
+.tasks th {
+  position: relative;
+}

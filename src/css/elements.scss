@@ -8,22 +8,26 @@
     color: #000000;
     background-color: transparent;
     border: 1px solid;
-    border-color: rgba(31,41,55,1);
+    border-color: rgba(31, 41, 55, 1);
     border-radius: 0.25rem;
     margin-bottom: 8px;
+
     &:hover {
       background-color: rgba(28, 33, 38, 1);
       color: #ffffff;
     }
+
     &.current {
       background-color: rgba(28, 33, 38, 1);
       color: #ffffff;
     }
+
     &.prev {
       &:before {
         content: "⬅";
       }
     }
+
     &.next {
       &:before {
         content: "⮕";
@@ -39,5 +43,32 @@
 }
 
 .text-balance {
-  text-wrap: balance; 
+  text-wrap: balance;
+}
+
+.resizer {
+  width: 5px;
+  height: 100%;
+  background: #ccc;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: ew-resize;
+  user-select: none;
+}
+
+.tasks table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tasks th,
+.tasks td {
+  text-align: left;
+  white-space: nowrap;
+  /* Запобігає переносу тексту */
+}
+
+.tasks th {
+  position: relative;
 }

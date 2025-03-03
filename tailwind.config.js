@@ -55,7 +55,8 @@ module.exports = {
     'bg-lime-50',
     'bg-green-50',
     'bg-emerald-50',
-    'bg-gray-100'
+    'bg-gray-100',
+    'bg-red-500'
   ],
   theme: {
     zIndex: {
@@ -95,7 +96,8 @@ module.exports = {
         heading: "Playfair Display",
         text: ["Nunito"],
         subtitle: ["Noto Sans"],
-        title: ["Shantell Sans"]
+        title: ["Shantell Sans"],
+        inter: ["Inter Tight"],
       },
     },
   },

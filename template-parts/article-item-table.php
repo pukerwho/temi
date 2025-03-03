@@ -56,7 +56,15 @@
   <!-- Дата -->
   <td class="border-r whitespace-nowrap p-2">
     <div class="">
-      <?php echo carbon_get_the_post_meta('crb_article_date'); ?>
+      <?php 
+      $date = carbon_get_the_post_meta('crb_article_date'); 
+      
+      if ($date) {
+        // $date = strtotime($date);
+        $date = date("d.m.Y", $date);
+      }
+      echo $date;
+      ?>
     </div>
   </td>
   <!-- END Дата -->

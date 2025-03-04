@@ -5,7 +5,7 @@
 <tr class="odd:bg-white even:bg-gray-100 border-b search_articles_line" data-metadata='{"name": "website","category": "site","tag": ["<?php echo htmlspecialchars($title,ENT_QUOTES); ?>", "<?php echo htmlspecialchars($keywords, ENT_QUOTES); ?>"]}'>
   <!-- Назва статті -->
   <td class="border-r border-l p-2">
-    <div class="flex items-center whitespace-nowrap text-ellipsis overflow-hidden gap-2">
+    <div class="max-w-[450px] flex items-center whitespace-nowrap text-ellipsis overflow-hidden gap-2">
       <div class="relative text-ellipsis overflow-hidden whitespace-nowrap flex items-center">
         <div><?php the_title(); ?></div>
       </div>
@@ -117,7 +117,7 @@
           <!-- Правкі -->
           <div class="mb-4">
             <div class="text-gray-800 font-bold uppercase mb-2">Зауваження</div>
-            <div class="bg-yellow-50 border-2 border-dashed rounded-lg p-4">
+            <div class="bg-yellow-50 text-wrap border-2 border-dashed rounded-lg p-4">
               <?php echo nl2br(carbon_get_the_post_meta("crb_tasks_reject")); ?>
             </div>
           </div>

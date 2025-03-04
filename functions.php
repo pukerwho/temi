@@ -384,6 +384,33 @@ function update_params_field_programmatic() {
 }
 // update_params_field_programmatic();
 
+function update_authors_field() {
+  $postType = 'tasks';
+  $newValue = '';
+  $args = [ 'post_type' => $postType, 'posts_per_page' => -1, 'fields' => 'ids'];
+  $posts = get_posts($args);
+  foreach ( $posts as $post ) {
+    if ( !metadata_exists( 'post', $post, '_crb_tasks_author' ) ) {
+      update_post_meta( $post, '_crb_tasks_author', '' );
+    } 
+  }
+}
+update_authors_field();
+
+function update_url_field() {
+  $postType = 'tasks';
+  $newValue = '';
+  $args = [ 'post_type' => $postType, 'posts_per_page' => -1, 'fields' => 'ids'];
+  $posts = get_posts($args);
+  foreach ( $posts as $post ) {
+    $site = get_post_meta($post, "_crb_tasks_site", true);
+    $url = preg_replace("(^https?://)", "", $site );
+    $url = preg_replace("(/)", "", $url );
+    update_post_meta( $post, '_crb_tasks_site', $url );
+  }
+}
+update_url_field();
+
 function admin_default_page() {
   return '/';
 }

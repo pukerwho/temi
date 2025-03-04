@@ -395,7 +395,7 @@ function update_authors_field() {
     } 
   }
 }
-update_authors_field();
+// update_authors_field();
 
 function update_url_field() {
   $postType = 'tasks';
@@ -409,7 +409,7 @@ function update_url_field() {
     update_post_meta( $post, '_crb_tasks_site', $url );
   }
 }
-update_url_field();
+// update_url_field();
 
 function admin_default_page() {
   return '/';

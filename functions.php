@@ -384,3 +384,8 @@ function update_params_field_programmatic() {
 }
 // update_params_field_programmatic();
 
+function admin_default_page() {
+  return '/';
+}
+
+add_filter('login_redirect', 'admin_default_page');

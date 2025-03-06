@@ -67,9 +67,6 @@ $quotes = [
               'post_type' => 'tasks', 
               'posts_per_page' => -1,
               'fields' => 'ids',
-              'meta_key' => '_crb_tasks_price',
-              'orderby' => 'meta_value',
-              'order' => 'ASC',
               'meta_query' => array(
                 'relation' => 'OR',
                 array(

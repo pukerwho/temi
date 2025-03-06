@@ -96,6 +96,18 @@
             </div>
           </div>
           <!-- END Keywords -->
+          
+          <?php if (carbon_get_the_post_meta("crb_tasks_reject")): ?>
+          <!-- Правкі -->
+          <div class="mb-4">
+            <div class="text-gray-800 font-bold uppercase mb-2">Зауваження</div>
+            <div class="bg-yellow-50 text-wrap border-2 border-dashed rounded-lg p-4">
+              <?php echo nl2br(carbon_get_the_post_meta("crb_tasks_reject")); ?>
+            </div>
+          </div>
+          <!-- END Правкі -->
+          <?php endif; ?>
+          
           <div>
             <div class="text-gray-800 font-bold uppercase mb-2">Посилання на статтю</div>
             <div><a href="<?php echo carbon_get_the_post_meta("crb_tasks_url"); ?>" target="_blank">Відкрити</a></div>

@@ -34,7 +34,7 @@
   </td>
   <!-- END Сайт -->
   <!-- Показники -->
-  <td class="border-r whitespace-nowrap p-2">
+  <td class="max-w-[165px] border-r whitespace-nowrap p-2">
     <div class="flex items-center gap-2">
       <div class="flex items-center">
         <div class="w-[9px] h-[9px] bg-orange-300 rounded-full mr-1"></div>

@@ -136,7 +136,9 @@ $current_user_id = get_current_user_id();
         <table class="articles w-full table-auto overflow-scroll text-sm mb-6">
           <thead>
             <tr class="border-b border-gray-200 text-left font-medium  bg-black/80 text-gray-200">
-              <th class="border-r p-2">Назва статті</th>
+              <th id="resizable-column" class="border-r p-2">Назва статті
+                <div class="resizer"></div>
+              </th>
               <th class="border-r p-2">Автор</th>
               <th class="border-r p-2">Сайт</th>
               <th class="border-r p-2">Показники</th>

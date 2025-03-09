@@ -974,6 +974,10 @@ video {
   max-width: 200px;
 }
 
+.max-w-\[400px\]{
+  max-width: 400px;
+}
+
 .max-w-\[450px\]{
   max-width: 450px;
 }
@@ -982,12 +986,12 @@ video {
   max-width: 640px;
 }
 
-.table-auto{
-  table-layout: auto;
+.max-w-\[420px\]{
+  max-width: 420px;
 }
 
-.table-fixed{
-  table-layout: fixed;
+.table-auto{
+  table-layout: auto;
 }
 
 .-translate-y-full{

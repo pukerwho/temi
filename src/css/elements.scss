@@ -63,12 +63,15 @@
 }
 
 .tasks th,
-.tasks td {
+.tasks td,
+.articles th,
+.articles td {
   text-align: left;
   white-space: nowrap;
   /* Запобігає переносу тексту */
 }
 
-.tasks th {
+.tasks th,
+.articles th {
   position: relative;
 }

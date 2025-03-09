@@ -131,41 +131,39 @@ $current_user_id = get_current_user_id();
         </form>
       </div>
       <div><input id="search_articles_box" placeholder="Пошук" class="w-full bg-white text-lg outline-none px-4 py-2" /></div>
-      <!-- Table -->
-      <table class="w-full text-sm mb-6">
-        <thead>
-          <tr class="border-b text-left font-medium bg-[#f4f4f4] text-gray-700">
-            <th class="border-r p-2">
-              <div class="flex items-center gap-2">
-                Назва статті
-              </div>
-            </th>
-            <th class="border-r p-2">Автор</th>
-            <th class="border-r p-2">Сайт</th>
-            <th class="border-r p-2">Показники</th>
-            <th class="border-r p-2">Дата</th>
-            <th class="p-2">Ключові фрази</th>
-          </tr>
-        </thead>
-        <tbody id="response" class="text-sm">
-          <?php 
-            // $new_posts = get_cached_articles();
-            global $wp_query, $wp_rewrite;  
-            $wp_query->query_vars['page'] > 1 ? $current = $wp_query->query_vars['page'] : $current = 1;
-            $new_posts = new WP_Query( array(
-              'post_type' => 'articles', 
-              'posts_per_page' => 20,
-              'order' => 'DESC',
-              'fields' => 'ids',
-              'paged' => $current, 
-            ));
-            if ($new_posts->have_posts()) : while ($new_posts->have_posts()) : $new_posts->the_post(); 
-          ?>
-            <?php get_template_part('template-parts/article-item-table'); ?>
-          <?php endwhile; endif; wp_reset_postdata(); ?>
-          
-        </tbody>
-      </table>
+      <div class="overflow-x-auto">
+        <!-- Table -->
+        <table class="articles w-full table-auto overflow-scroll text-sm mb-6">
+          <thead>
+            <tr class="border-b border-gray-200 text-left font-medium  bg-black/80 text-gray-200">
+              <th class="border-r p-2">Назва статті</th>
+              <th class="border-r p-2">Автор</th>
+              <th class="border-r p-2">Сайт</th>
+              <th class="border-r p-2">Показники</th>
+              <th class="border-r p-2">Дата</th>
+              <th class="p-2">Ключові фрази</th>
+            </tr>
+          </thead>
+          <tbody id="response" class="text-sm">
+            <?php 
+              // $new_posts = get_cached_articles();
+              global $wp_query, $wp_rewrite;  
+              $wp_query->query_vars['page'] > 1 ? $current = $wp_query->query_vars['page'] : $current = 1;
+              $new_posts = new WP_Query( array(
+                'post_type' => 'articles', 
+                'posts_per_page' => 20,
+                'order' => 'DESC',
+                'fields' => 'ids',
+                'paged' => $current, 
+              ));
+              if ($new_posts->have_posts()) : while ($new_posts->have_posts()) : $new_posts->the_post(); 
+            ?>
+              <?php get_template_part('template-parts/article-item-table'); ?>
+            <?php endwhile; endif; wp_reset_postdata(); ?>
+          </tbody>
+        </table>
+      </div>
+      
       <div class="b_pagination text-center mb-12">
         <?php 
               $big = 9999999991; // уникальное число

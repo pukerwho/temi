@@ -817,6 +817,10 @@ video {
   margin-left: 0.25rem;
 }
 
+.ml-2{
+  margin-left: 0.5rem;
+}
+
 .ml-4{
   margin-left: 1rem;
 }
@@ -1146,6 +1150,10 @@ video {
 
 .border-2{
   border-width: 2px;
+}
+
+.border-4{
+  border-width: 4px;
 }
 
 .border-b{
@@ -2309,6 +2317,19 @@ a{
 
 .value-diff {
   font-size: 12px;
+}
+
+.tab{
+  width: 50%;
+  cursor: pointer;
+  padding: 0.5rem;
+  text-align: center;
+  font-family: Shantell Sans;
+}
+
+.tab.active{
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
 }
 
 .last\:border-transparent:last-child{

@@ -4,6 +4,7 @@ function task_accept_function() {
 
   $post_id = stripslashes_deep($_POST['postId']);
   $author_id = get_post_meta($post_id, '_crb_tasks_author', true);
+  $website = get_post_meta($post_id, '_crb_tasks_site', true);
   $task_price = get_post_meta($post_id, '_crb_tasks_price', true);
   $author_balance = get_user_meta($author_id, '_crb_user_balance', true);
   $aurhor_balance_new = intval($author_balance) + $task_price;
@@ -14,6 +15,7 @@ function task_accept_function() {
   update_post_meta($post_id, '_crb_tasks_status', 'accept');
 
   create_new_article($post_id);
+  update_site_balance($website, $task_price);
 
   echo 'hi';
   wp_die();
@@ -48,4 +50,13 @@ function create_new_article($post_id) {
     ),
   );
   wp_insert_post( $my_post );
+}
+
+function update_site_balance($website, $task_price) {
+  // $args = [ 'post_type' => 'websites', 'posts_per_page' => -1, 'fields' => 'ids', 'meta_query' => array( array( 'key'   => '_crb_website_url', 'value' => $website,))];
+  // $sites = get_posts($args);
+  $website = str_replace('.', '_', $website);
+  $get_current_site_balance = get_option('_crb_website_'. $website .'');
+  $new_current_site_balance = intval($get_current_site_balance) + $task_price;
+  update_option( '_crb_website_'. $website .'', $new_current_site_balance );
 }

@@ -167,3 +167,11 @@ a {
 .value-diff {
   font-size: 12px;
 }
+
+.tab {
+  @apply w-1/2 text-center font-title cursor-pointer p-2;
+}
+
+.tab.active {
+  @apply bg-red-200;
+}

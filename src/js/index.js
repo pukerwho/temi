@@ -3,6 +3,7 @@ import "../../node_modules/jquery-ui/dist/jquery-ui.min.js";
 import "./scripts.js";
 import "./filters.js";
 import "./tabs.js";
+import "./prott-sort.js";
 import "./tasks/get_task_work.js";
 import "./tasks/remove_task.js";
 import "./tasks/add_link_task.js";

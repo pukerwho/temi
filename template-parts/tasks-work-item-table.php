@@ -125,6 +125,21 @@
           <?php endif; ?>
           <div>
             <div class="text-gray-800 font-bold uppercase mb-2">Посилання на статтю</div>
+            <div class="bg-blue-100 border-4 border-blue-500 border-dashed text-wrap rounded-lg p-4 mb-4">
+              <p class="mb-2">Перед тим, як відправити посилання, перевір ще раз свою статтю. Ось помилки, які автори роблять найчастіше:</p>
+              <ul class="mb-2">
+                <li>- В різних розділах пишуть про одне і те саме. </li>
+                <li>- Забувають про конкретику, натомість ллють дуже багато води. </li>
+                <li>- Починають або закінчують розділ списком. </li>
+                <li>- Роблять списки з дооооовгими реченнями. </li>
+                <li>- Забувають обрати категорію. </li>
+                <li>- Забувають, що існують підзаголовки h3. </li>
+                <li>- Не прибирають "жирний" текст. </li>
+                <li>- Не рахують списки. </li>
+                <li>- Не заповнюють поля Title, Description, Keywords. </li>
+              </ul>
+              <p>Це ж не про тебе? Якщо ні, тоді сміливо відправляй посилання.</p>
+            </div>
             <div class="task-link-error hidden text-red-500 mb-2" data-task-id="<?php echo get_the_ID(); ?>"></div>
             <div class="mb-2"><input type="text" class="task-link w-full border border-gray-200 bg-gray-100 rounded px-4 py-2" data-inputlink-id="<?php echo get_the_ID(); ?>"></div>
             <div class="task-link-js" data-post-id="<?php echo get_the_ID(); ?>" data-site-url="<?php echo carbon_get_the_post_meta('crb_tasks_site');  ?>"><div class="bg-blue-500 text-white text-center rounded cursor-pointer px-4 py-2">Відправити</div></div>

@@ -34,20 +34,10 @@ function crb_post_theme_options() {
       
   ) );
   Container::make( 'post_meta', 'More' )
-    ->where( 'post_type', '=', 'drops' )
+    ->where( 'post_type', '=', 'websites' )
     ->add_fields( array(
-      Field::make( 'text', 'crb_drops_dr', 'DR' ),
-      Field::make( 'text', 'crb_drops_tf', 'TF' ),
-      Field::make( 'text', 'crb_drops_cf', 'CF' ),
-      Field::make( 'text', 'crb_drops_expired', 'Expired' ),
-      Field::make( 'association', 'crb_drops_websites', 'Сайти')
-      ->set_types( array(
-        array(
-          'type'      => 'post',
-          'post_type' => 'websites',
-        )
-      ) )
-      // Field::make( 'text', 'crb_websites_week', 'Update Week' ),
+      Field::make( 'text', 'crb_website_url', 'URL сайта' ),
+      Field::make( 'text', 'crb_website_balance', 'Витрачено' ),
   ) );
   
 }

@@ -14,7 +14,7 @@
   <!-- END Назва статті -->
   <!-- Сайт -->
   <td class="border-r whitespace-nowrap p-2">
-    <?php echo carbon_get_the_post_meta('crb_tasks_site');  ?>
+    <span class="data-sort-prott"><?php echo carbon_get_the_post_meta('crb_tasks_site');  ?></span>
   </td>
   <!-- END Сайт -->
 
@@ -35,19 +35,19 @@
     </div>
   </td>
   <!-- END Ціна -->
-  <!-- Статус -->
+  
+  <!-- Дата -->
   <td class="border-r whitespace-nowrap p-2">
-    <div class="text-green-500">Виконано</div>
+    <?php 
+      $get_time_complete_task = carbon_get_the_post_meta('crb_tasks_complete_date'); 
+      $get_time_task = carbon_get_the_post_meta('crb_tasks_author_date'); 
+      $task_finish_date = taskFinishDate($get_time_task, $get_time_complete_task);
+      if ($get_time_complete_task) { $get_time_complete_task = date("d.m.Y", $get_time_complete_task); }
+      echo $get_time_complete_task;
+    ?>
+    , <span class="font-bold <?php echo ($task_finish_date > 20) ? 'text-red-500' : 'text-green-500'; ?>"><?php echo $task_finish_date; ?></span> г.
   </td>
-  <!-- END Ціна -->
-  <!-- Keywords -->
-  <td class="border-r whitespace-nowrap p-2">
-    <?php $count_keywords = carbon_get_the_post_meta("crb_tasks_ahrefs"); ?>
-    <div>
-      <span class="<?php echo ($count_keywords > 10) ? "text-green-500" : ''; ?>"><?php echo ($count_keywords) ? $count_keywords : 'Немає даних'; ?></span>
-    </div>
-  </td>
-  <!-- END Keywords -->
+  <!-- END Дата -->
   <!-- Деталі -->
   <td class="border-r whitespace-nowrap p-2">
     

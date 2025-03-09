@@ -978,12 +978,12 @@ video {
   max-width: 200px;
 }
 
-.max-w-\[420px\]{
-  max-width: 420px;
-}
-
 .max-w-\[450px\]{
   max-width: 450px;
+}
+
+.max-w-\[500px\]{
+  max-width: 500px;
 }
 
 .max-w-\[640px\]{

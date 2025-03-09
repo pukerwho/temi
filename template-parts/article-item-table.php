@@ -4,7 +4,7 @@
 ?>
 <tr class="odd:bg-white even:bg-gray-100 border-b search_articles_line" data-metadata='{"name": "website","category": "site","tag": ["<?php echo htmlspecialchars($title,ENT_QUOTES); ?>", "<?php echo htmlspecialchars($keywords, ENT_QUOTES); ?>"]}'>
   <!-- Назва статті -->
-  <td class="max-w-[420px] border-r p-2">
+  <td class="max-w-[500px] border-r p-2">
     <div class="flex items-center whitespace-nowrap text-ellipsis overflow-hidden gap-2">
       <div class="relative text-blue-500 text-ellipsis overflow-hidden whitespace-nowrap flex items-center">
         <a href="<?php echo carbon_get_the_post_meta('crb_article_link'); ?>" target="_blank" class="w-full h-full absolute top-0 left-0 z-1"></a>

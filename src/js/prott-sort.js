@@ -50,10 +50,16 @@ document.addEventListener("DOMContentLoaded", function () {
             return isAscending ? dateA - dateB : dateB - dateA;
           }
 
-          // Для всього іншого сортуємо як текст
-          return isAscending
-            ? textA.localeCompare(textB, "uk")
-            : textB.localeCompare(textA, "uk");
+          if (header.getAttribute("data-sort-type") === "text") {
+            return isAscending ? textA.localeCompare(textB, "uk") : textB.localeCompare(textA);
+          }
+
+          const numA = getNumericValue(textA);
+          const numB = getNumericValue(textB);
+
+          return isNaN(numA) || isNaN(numB)
+            ? (isAscending ? textA.localeCompare(textB, "uk") : textB.localeCompare(textA))
+            : (isAscending ? numA - numB : numB - numA);
         });
 
         // Додаємо відсортовані рядки назад у таблицю
@@ -68,5 +74,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const [day, month] = dayMonth.split(".");
     const [hours, minutes] = time.split(":");
     return new Date(new Date().getFullYear(), month - 1, day, hours, minutes);
+  }
+
+  // Функція для отримання числового значення
+  function getNumericValue(text) {
+    return parseFloat(text.replace(/[^\d.-]/g, "")) || 0;
   }
 });

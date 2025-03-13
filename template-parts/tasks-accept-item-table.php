@@ -38,6 +38,7 @@
   
   <!-- Дата -->
   <td class="border-r whitespace-nowrap p-2">
+    <span class="data-sort-prott hidden"><?php echo carbon_get_the_post_meta('crb_tasks_complete_date'); ?></span>
     <?php 
       $get_time_complete_task = carbon_get_the_post_meta('crb_tasks_complete_date'); 
       $get_time_task = carbon_get_the_post_meta('crb_tasks_author_date'); 

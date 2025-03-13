@@ -14,13 +14,13 @@
   <!-- END Назва статті -->
   <!-- Сайт -->
   <td class="border-r whitespace-nowrap p-2">
-    <?php echo carbon_get_the_post_meta('crb_tasks_site');  ?>
+    <span class="data-sort-prott"><?php echo carbon_get_the_post_meta('crb_tasks_site');  ?></span>
   </td>
   <!-- END Сайт -->
   <!-- Ціна -->
   <td class="border-r whitespace-nowrap p-2">
     <div class="">
-      <?php echo carbon_get_the_post_meta('crb_tasks_price'); ?> грн.
+      <span class="data-sort-prott"><?php echo carbon_get_the_post_meta('crb_tasks_price'); ?></span> грн.
     </div>
   </td>
   <!-- END Ціна -->

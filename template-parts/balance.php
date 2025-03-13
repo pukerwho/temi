@@ -7,7 +7,7 @@
     <div class="modal-content">
       <div class="modal-box w-full max-w-[640px] min-h-full text-base bg-white rounded-lg px-6 py-4">
         <div class="text-gray-800 text-center font-bold uppercase mb-2">Баланси</div>
-        <div class="flex flex-wrap border border-gray-200 mb-2">
+        <div class="flex flex-wrap bg-gray-200 rounded-lg p-1 mb-2">
           <div class="tab active" data-tab="authors">Автори</div>
           <div class="tab" data-tab="sites">Сайти</div>
         </div>

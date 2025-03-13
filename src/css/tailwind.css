@@ -169,9 +169,9 @@ a {
 }
 
 .tab {
-  @apply w-1/2 text-center font-title cursor-pointer p-2;
+  @apply w-1/2 text-center font-title rounded-lg cursor-pointer p-1;
 }
 
 .tab.active {
-  @apply bg-red-200;
+  @apply bg-white;
 }

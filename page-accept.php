@@ -87,7 +87,7 @@ $all_tasks = new WP_Query( array(
                 <th id="resizable-column" class="p-2">📋 Назва
                   <div class="resizer"></div>
                 </th>
-                <th class="p-2 prott-sort-js" data-sort-id="1">
+                <th class="p-2 prott-sort-js" data-sort-type="text" data-sort-id="1">
                   <div class="flex items-center">
                     <div>🌐 Сайт</div>
                     <div class="sort-arrow hidden ml-2">
@@ -101,7 +101,16 @@ $all_tasks = new WP_Query( array(
                   <th class="p-2">👤 Автор</th>
                 <?php endif; ?>
                 <th class="p-2">🏷️ Ціна</th>
-                <th class="p-2">📅 Дата</th>
+                <th class="p-2 prott-sort-js" data-sort-id="2">
+                  <div class="flex items-center">
+                    <div>📅 Дата</div>
+                    <div class="sort-arrow hidden ml-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </div>
+                  </div>
+                </th>
                 <th class="p-2">ℹ️ Завдання</th>
               </tr>
             </thead>

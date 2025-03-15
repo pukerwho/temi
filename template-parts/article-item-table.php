@@ -24,12 +24,12 @@
   <!-- Сайт -->
   <td class="border-r whitespace-nowrap p-2">
     <?php  
-      $article_site = carbon_get_the_post_meta('crb_article_site');
-      $site_text_color = site_text_color($article_site);
-      $site_bg_color = site_bg_color($article_site);
+      $article_link = carbon_get_the_post_meta('crb_article_link');
+      $parse_link = parse_url($article_link);
+      $host = $parse_link['host'];
     ?>
     <span class="">
-      <?php  echo get_site($article_site);  ?>
+      <?php  echo get_site($host);  ?>
     </span>
   </td>
   <!-- END Сайт -->

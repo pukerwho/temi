@@ -51,7 +51,10 @@
       $minute = $task_finish_date->i;
       echo $get_time_complete_task;
     ?>
-    , <span class="font-bold <?php echo ($hours > 20) ? 'text-red-500' : 'text-green-500'; ?>"><?php echo $hours; ?></span> г., <?php echo $minute; ?> мін.
+    , <span class="font-bold <?php echo ($hours > 20) ? 'text-red-500' : 'text-green-500'; ?>"><?php echo $hours; ?></span> г.
+    <?php if (get_current_user_id() === 1): ?>
+      , <?php echo $minute; ?> м.
+    <?php endif; ?>
   </td>
   <!-- END Дата -->
   <!-- Деталі -->

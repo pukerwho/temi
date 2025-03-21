@@ -51,7 +51,7 @@
         $hours = $hours + ($task_finish_date->days*24);
         $minute = $task_finish_date->i;
       ?> 
-      <span class="font-bold <?php echo ($hours > 20) ? 'text-red-500' : 'text-green-500'; ?>"><?php echo $hours; ?></span> г., <?php echo $minute; ?> м.
+      <span class="font-bold <?php echo ($hours > 20) ? 'text-red-500' : 'text-green-500'; ?>"><?php echo $hours; ?></span> г., <?php echo $minute; ?> хв.
     </div>
   </td>
   <!-- END Таймер -->

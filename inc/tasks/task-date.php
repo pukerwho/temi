@@ -5,9 +5,9 @@ function taskFinishDate($get_time_task, $get_time_complete_task) {
   $finish = date("Y/m/d H:i:s", $get_time_complete_task);
   $start_datetime = new DateTime($start);
   $diff = $start_datetime->diff(new DateTime($finish)); 
-  $hours = $diff->h;
-  $hours = $hours + ($diff->days*24);
-  return $hours;
+  // $hours = $diff->h;
+  // $hours = $hours + ($diff->days*24);
+  return $diff;
 }
 
 function taskContinueDate($get_time_task) {

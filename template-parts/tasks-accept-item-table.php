@@ -43,10 +43,15 @@
       $get_time_complete_task = carbon_get_the_post_meta('crb_tasks_complete_date'); 
       $get_time_task = carbon_get_the_post_meta('crb_tasks_author_date'); 
       $task_finish_date = taskFinishDate($get_time_task, $get_time_complete_task);
-      if ($get_time_complete_task) { $get_time_complete_task = date("d.m.Y", $get_time_complete_task); }
+      if ($get_time_complete_task) { 
+        $get_time_complete_task = date("d.m.Y", $get_time_complete_task);
+      }
+      $hours = $task_finish_date->h;
+      $hours = $hours + ($task_finish_date->days*24);
+      $minute = $task_finish_date->i;
       echo $get_time_complete_task;
     ?>
-    , <span class="font-bold <?php echo ($task_finish_date > 20) ? 'text-red-500' : 'text-green-500'; ?>"><?php echo $task_finish_date; ?></span> г.
+    , <span class="font-bold <?php echo ($hours > 20) ? 'text-red-500' : 'text-green-500'; ?>"><?php echo $hours; ?></span> г., <?php echo $minute; ?> мін.
   </td>
   <!-- END Дата -->
   <!-- Деталі -->

@@ -7,7 +7,16 @@
   <td class="border-r border-l p-2">
     <div class="max-w-[450px] flex items-center whitespace-nowrap text-ellipsis overflow-hidden gap-2">
       <div class="relative text-ellipsis overflow-hidden whitespace-nowrap flex items-center">
-        <div><?php the_title(); ?></div>
+        <div>
+          <?php 
+          $url = carbon_get_the_post_meta("crb_tasks_url"); 
+          if ($url):
+          ?>
+            <a href="<?php echo carbon_get_the_post_meta("crb_tasks_url"); ?>" target="_blank"><?php the_title(); ?></a>
+          <?php else: ?>
+            <?php the_title(); ?>
+          <?php endif; ?>
+        </div>
       </div>
     </div>
   </td>
@@ -56,7 +65,10 @@
         $get_time_task = carbon_get_the_post_meta('crb_tasks_author_date'); 
         $get_complete_date_task = carbon_get_the_post_meta('crb_tasks_complete_date'); 
         if ($get_complete_date_task != '') {
-          $time = taskFinishDate($get_time_task, $get_complete_date_task);
+          $get_time = taskFinishDate($get_time_task, $get_complete_date_task);
+          $hours = $get_time->h;
+          $time = $hours + ($get_time->days*24);
+          // $minute = $time->m;
         } else {
           $time = taskContinueDate($get_time_task);
         }
@@ -125,7 +137,7 @@
           <?php endif; ?>
           <div>
             <div class="text-gray-800 font-bold uppercase mb-2">Посилання на статтю</div>
-            <div class="bg-blue-100 border-4 border-blue-500 border-dashed text-wrap rounded-lg p-4 mb-4">
+            <div class="hidden bg-blue-100 border-4 border-blue-500 border-dashed text-wrap rounded-lg p-4 mb-4">
               <p class="mb-2">Перед тим, як відправити посилання, перевір ще раз свою статтю. Ось помилки, які автори роблять найчастіше:</p>
               <ul class="mb-2">
                 <li>- В різних розділах пишуть про одне і те саме. </li>

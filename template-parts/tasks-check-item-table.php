@@ -51,10 +51,17 @@
         $hours = $hours + ($task_finish_date->days*24);
         $minute = $task_finish_date->i;
       ?> 
-      <span class="font-bold <?php echo ($hours > 20) ? 'text-red-500' : 'text-green-500'; ?>"><?php echo $hours; ?></span> г.
-      <?php if (get_current_user_id() === 1): ?>
-        , <?php echo $minute; ?> хв.
-      <?php endif; ?>
+      <div class="relative group inline-block">
+        <span class="font-bold <?php echo ($hours > 20) ? 'text-red-500' : 'text-green-500'; ?>"><?php echo $hours; ?></span> г.
+        <?php if (get_current_user_id() === 1): ?>
+          , <?php echo $minute; ?> хв.
+          <!-- Tooltip -->
+          <div class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max px-2 py-1 text-sm bg-yellow-100 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10">
+            <div>Взято: <?php echo date("Y/m/d H:i:s", $get_time_task); ?></div>
+            <div>Здано: <?php echo date("Y/m/d H:i:s", $get_time_complete_task); ?></div>
+          </div>
+        <?php endif; ?>
+      </div>
     </div>
   </td>
   <!-- END Таймер -->

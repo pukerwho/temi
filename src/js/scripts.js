@@ -56,23 +56,45 @@ clipboard.on('success', function (e) {
   }, 2000);
 });
 
+// Декодуємо HTML-ентіті вручну
+function decodeHtmlEntities(str) {
+  return str
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#8211;/g, '-'); // ен-даші
+}
+
 //Швидкий пошук статей
 $("#search_articles_box").keyup(function () {
-  var filter = $(this).val();
-  filter = filter.toLowerCase();
-  $(".search_articles_line").each(function () {
-    var metadata = $(this).data("metadata");
-    var regexp = new RegExp(filter);
-    var metadatastring = "";
-    metadatastring = metadatastring.toLowerCase();
+  var filter = $(this).val().toLowerCase().normalize("NFKD");
+  filter = filter.replace(/\s*[–—−‒―]\s*/g, "-");
+  var escapedFilter = filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  var regexp = new RegExp(escapedFilter, "i");
 
-    if (typeof metadata.tag != "undefined") {
-      metadatastring = metadata.tag.join(" ");
+  $(".search_articles_line").each(function () {
+    var metadataRaw = $(this).attr("data-metadata");
+    var decoded = decodeHtmlEntities(metadataRaw);
+    var metadata = {};
+
+    try {
+      metadata = JSON.parse(decoded);
+    } catch (e) {
+      metadata = {};
     }
-    if (metadatastring.toLowerCase().search(regexp) < 0) {
+
+    var metadatastring = "";
+    console.log("🟢", metadata.tag.join(" "));
+    if (typeof metadata.tag !== "undefined") {
+      metadatastring = metadata.tag.join(" ").toLowerCase().normalize("NFKD");
+      metadatastring = metadatastring.replace(/\s*[–—−‒―]\s*/g, "-");
+    }
+
+    if (!regexp.test(metadatastring)) {
       $(this).hide();
-    }
-    else {
+    } else {
       $(this).show();
     }
   });
@@ -111,7 +133,6 @@ if (resizer) {
     document.addEventListener("mouseup", stopResizing);
   });
 }
-
 
 function resizeColumn(event) {
   if (isResizing) {

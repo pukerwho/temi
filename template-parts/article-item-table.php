@@ -2,7 +2,11 @@
   $keywords = carbon_get_the_post_meta('crb_article_keywords'); 
   $title = get_the_title();
 ?>
-<tr class="border-b search_articles_line" data-metadata='{"name": "website","category": "site","tag": ["<?php echo htmlspecialchars($title,ENT_QUOTES); ?>", "<?php echo htmlspecialchars($keywords, ENT_QUOTES); ?>"]}'>
+<tr class="border-b search_articles_line" data-metadata="<?php echo htmlspecialchars(json_encode([
+  'name' => 'website',
+  'category' => 'site',
+  'tag' => [$title, $keywords]
+]), ENT_QUOTES, 'UTF-8'); ?>">
   <!-- Назва статті -->
   <td class="max-w-[500px] border-r p-2">
     <div class="flex items-center whitespace-nowrap text-ellipsis overflow-hidden gap-2">

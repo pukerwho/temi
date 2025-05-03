@@ -82,6 +82,10 @@ $current_user_id = get_current_user_id();
                     "key" => "_crb_article_ahrefs",
                   ],
                   [
+                    "name" => "По traffic",
+                    "key" => "_crb_article_ahrefs_traffic",
+                  ],
+                  [
                     "name" => "По клікам",
                     "key" => "_crb_article_google_click",
                   ],
@@ -141,8 +145,8 @@ $current_user_id = get_current_user_id();
               </th>
               <th class="border-r p-2">Автор</th>
               <th class="border-r p-2">Сайт</th>
-              <th class="border-r p-2">Показники</th>
-              <th class="border-r p-2">Дата</th>
+              <th class="border-r p-2">Ahrefs</th>
+              <th class="border-r p-2">GST</th>
               <th class="p-2">Ключові фрази</th>
             </tr>
           </thead>

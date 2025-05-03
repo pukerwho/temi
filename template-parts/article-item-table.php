@@ -9,13 +9,24 @@
 ]), ENT_QUOTES, 'UTF-8'); ?>">
   <!-- Назва статті -->
   <td class="max-w-[500px] border-r p-2">
-    <div class="flex items-center whitespace-nowrap text-ellipsis overflow-hidden gap-2">
+    <div class="whitespace-nowrap text-ellipsis overflow-hidden gap-y-2">
       <div class="relative text-blue-500 text-ellipsis overflow-hidden whitespace-nowrap flex items-center">
         <a href="<?php echo carbon_get_the_post_meta('crb_article_link'); ?>" target="_blank" class="w-full h-full absolute top-0 left-0 z-1"></a>
         <div class="mr-1">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="14px" fill="currentColor"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/></svg>
         </div>
         <div><?php the_title(); ?></div>
+      </div>
+      <div class="text-gray-600 text-xs">
+        <?php 
+        $date = carbon_get_the_post_meta('crb_article_date'); 
+        
+        if ($date) {
+          // $date = strtotime($date);
+          $date = date("d.m.Y", $date);
+        }
+        echo $date;
+        ?>
       </div>
     </div>
   </td>
@@ -37,18 +48,26 @@
     </span>
   </td>
   <!-- END Сайт -->
-  <!-- Показники -->
+  <!-- Ahrefs -->
   <td class="max-w-[165px] border-r whitespace-nowrap p-2">
-    <div class="flex items-center gap-2">
+    <div class="gap-y-2">
       <div class="flex items-center">
         <div class="w-[9px] h-[9px] bg-orange-300 rounded-full mr-1"></div>
         <div class="mr-2"><?php echo carbon_get_the_post_meta('crb_article_ahrefs'); ?></div>
-        <div class="text-gray-400">|</div>
       </div>
+      <div class="flex items-center">
+        <div class="w-[9px] h-[9px] bg-yellow-300 rounded-full mr-1"></div>
+        <div class=""><?php echo carbon_get_the_post_meta('crb_article_ahrefs_traffic'); ?></div>
+      </div>
+    </div>
+  </td>
+  <!-- END Ahrefs -->
+  <!-- GST -->
+  <td class="max-w-[165px] border-r whitespace-nowrap p-2">
+    <div class="gap-y-2">
       <div class="flex items-center">
         <div class="w-[9px] h-[9px] bg-sky-300 rounded-full mr-1"></div>
         <div class="mr-2"><?php echo carbon_get_the_post_meta('crb_article_google_click'); ?></div>
-        <div class="text-gray-400">|</div>
       </div>
       <div class="flex items-center">
         <div class="w-[9px] h-[9px] bg-purple-300 rounded-full mr-1"></div>
@@ -56,22 +75,7 @@
       </div>
     </div>
   </td>
-  <!-- END Показники -->
-  <!-- Дата -->
-  <td class="border-r whitespace-nowrap p-2">
-    <div class="">
-      <?php 
-      $date = carbon_get_the_post_meta('crb_article_date'); 
-      
-      if ($date) {
-        // $date = strtotime($date);
-        $date = date("d.m.Y", $date);
-      }
-      echo $date;
-      ?>
-    </div>
-  </td>
-  <!-- END Дата -->
+  <!-- END GST -->
   <!-- Keywords -->
   <td class="p-2">
     <div class="max-w-[200px] flex items-center relative text-ellipsis overflow-hidden whitespace-nowrap cursor-pointer copy-click" data-clipboard-text="<?php echo $keywords; ?>" data-copy-text="<?php echo $keywords; ?>">

@@ -15,6 +15,7 @@ function crb_post_theme_options() {
       Field::make( 'text', 'crb_article_link', 'Посилання' ),
       Field::make( 'text', 'crb_article_keywords', 'Ключові посилання' ),
       Field::make( 'text', 'crb_article_ahrefs', 'Keywords' ),
+      Field::make( 'text', 'crb_article_ahrefs_traffic', 'Ahrefs Traffic' ),
       Field::make( 'text', 'crb_article_google_click', 'Кліки' ),
       Field::make( 'text', 'crb_article_google_views', 'Покази' ),
   ) );

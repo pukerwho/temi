@@ -417,3 +417,28 @@ function admin_default_page() {
 }
 
 add_filter('login_redirect', 'admin_default_page');
+
+/**
+ * Переводить у статус draft всі articles, crb_article_link яких містить певні домени.
+ */
+function set_articles_to_draft_by_url() {
+  $target_domains = ['nikeairmaxltdus.com', 'howlonglive.com', 'uburners.com'];
+  $args = [ 'post_type' => 'articles', 'posts_per_page' => -1, 'fields' => 'ids' ];
+  $posts = get_posts($args);
+
+  foreach ($posts as $post_id) {
+    $link = get_post_meta($post_id, '_crb_article_link', true);
+    if (!$link) continue;
+
+    foreach ($target_domains as $domain) {
+      if (strpos($link, $domain) !== false) {
+        wp_update_post([
+          'ID' => $post_id,
+          'post_status' => 'draft'
+        ]);
+        break;
+      }
+    }
+  }
+}
+set_articles_to_draft_by_url();

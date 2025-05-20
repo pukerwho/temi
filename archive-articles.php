@@ -9,13 +9,20 @@ $current_user_id = get_current_user_id();
     <div class="mx-auto max-w-7xl rounded-xl bg-white ">
       <!-- Header -->
       <div class="flex items-center justify-between border-b p-4">
-        <div class="flex items-center gap-2">
-          <span class="text-purple-600">📋</span>
-          <h1 class="text-xl font-title font-semibold">Статті</h1>
+        <div class="flex items-center gap-x-2">
+          <div>
+            <div class="text-sm font-medium">Оновлено: <span class="font-bold"><?php echo carbon_get_theme_option('crb_last_update'); ?></span></div>
+            <div class="hidden ml-auto items-center gap-2 rounded-md bg-blue-500 px-3 py-1.5 text-sm font-medium text-white cursor-pointer hover:bg-blue-600">Додати</div>
+          </div>
         </div>
-        <div>
-          <div class="text-sm font-medium">Оновлено: <span class="font-bold"><?php echo carbon_get_theme_option('crb_last_update'); ?></span></div>
-          <div class="hidden ml-auto items-center gap-2 rounded-md bg-blue-500 px-3 py-1.5 text-sm font-medium text-white cursor-pointer hover:bg-blue-600">Додати</div>
+        
+        <div class="flex items-center gap-x-2">
+          <div class="bg-gray-200 rounded-md text-sm font-medium cursor-pointer px-3 py-1.5 modal-open-js" data-modal-id="modal-pay">
+            Статистика
+          </div>
+          <div class="еxport_button bg-gray-200 rounded-md text-sm font-medium cursor-pointer px-3 py-1.5">
+            Експорт
+          </div>
         </div>
         <div class="hidden gap-2">
           <button class="rounded-md p-2 hover:bg-gray-100">
@@ -146,7 +153,7 @@ $current_user_id = get_current_user_id();
               <th class="border-r p-2">Автор</th>
               <th class="border-r p-2">Сайт</th>
               <th class="border-r p-2">Ahrefs</th>
-              <th class="border-r p-2">GST</th>
+              <th class="border-r p-2">GSC</th>
               <th class="p-2">Ключові фрази</th>
             </tr>
           </thead>
@@ -166,7 +173,94 @@ $current_user_id = get_current_user_id();
               ));
               if ($new_posts->have_posts()) : while ($new_posts->have_posts()) : $new_posts->the_post(); 
             ?>
-              <?php get_template_part('template-parts/article-item-table'); ?>
+              <?php 
+  $keywords = carbon_get_the_post_meta('crb_article_keywords'); 
+  $title = get_the_title();
+?>
+<tr class="border-b search_articles_line" data-metadata="<?php echo htmlspecialchars(json_encode([
+  'name' => 'website',
+  'category' => 'site',
+  'tag' => [$title, $keywords]
+]), ENT_QUOTES, 'UTF-8'); ?>">
+  <!-- Назва статті -->
+  <td class="max-w-[500px] border-r p-2">
+    <div class="whitespace-nowrap text-ellipsis overflow-hidden gap-y-2">
+      <div class="relative text-blue-500 text-ellipsis overflow-hidden whitespace-nowrap flex items-center">
+        <a href="<?php echo carbon_get_the_post_meta('crb_article_link'); ?>" target="_blank" class="w-full h-full absolute top-0 left-0 z-1"></a>
+        <div class="mr-1">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="14px" fill="currentColor"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/></svg>
+        </div>
+        <div><?php the_title(); ?></div>
+      </div>
+      <div class="text-gray-600 text-xs">
+        <?php 
+        $date = carbon_get_the_post_meta('crb_article_date'); 
+        
+        if ($date) {
+          // $date = strtotime($date);
+          $date = date("d.m.Y", $date);
+        }
+        echo $date;
+        ?>
+      </div>
+    </div>
+  </td>
+  <!-- END Назва статті -->
+  <!-- Автор -->
+  <td class="border-r whitespace-nowrap p-2">
+    <span class=""><?php echo carbon_get_the_post_meta('crb_article_author'); ?></span>
+  </td>
+  <!-- END Автор -->
+  <!-- Сайт -->
+  <td class="border-r whitespace-nowrap p-2">
+    <?php  
+      $article_link = carbon_get_the_post_meta('crb_article_link');
+      $parse_link = parse_url($article_link);
+      $host = $parse_link['host'];
+    ?>
+    <span class="">
+      <?php  echo get_site($host);  ?>
+    </span>
+  </td>
+  <!-- END Сайт -->
+  <!-- Ahrefs -->
+  <td class="max-w-[165px] border-r whitespace-nowrap p-2">
+    <div class="gap-y-2">
+      <div class="flex items-center">
+        <div class="w-[9px] h-[9px] bg-orange-300 rounded-full mr-1"></div>
+        <div class="text-xs mr-2"><?php echo carbon_get_the_post_meta('crb_article_ahrefs'); ?></div>
+      </div>
+      <div class="flex items-center">
+        <div class="w-[9px] h-[9px] bg-yellow-300 rounded-full mr-1"></div>
+        <div class="text-xs"><?php echo carbon_get_the_post_meta('crb_article_ahrefs_traffic'); ?></div>
+      </div>
+    </div>
+  </td>
+  <!-- END Ahrefs -->
+  <!-- GSC -->
+  <td class="max-w-[165px] border-r whitespace-nowrap p-2">
+    <div class="gap-y-2">
+      <div class="flex items-center">
+        <div class="w-[9px] h-[9px] bg-sky-300 rounded-full mr-1"></div>
+        <div class="text-xs mr-2"><?php echo carbon_get_the_post_meta('crb_article_google_click'); ?></div>
+      </div>
+      <div class="flex items-center">
+        <div class="w-[9px] h-[9px] bg-purple-300 rounded-full mr-1"></div>
+        <div class="text-xs"><?php echo carbon_get_the_post_meta('crb_article_google_views'); ?></div>
+      </div>
+    </div>
+  </td>
+  <!-- END GSC -->
+  <!-- Keywords -->
+  <td class="p-2">
+    <div class="max-w-[200px] flex items-center relative text-ellipsis overflow-hidden whitespace-nowrap cursor-pointer copy-click" data-clipboard-text="<?php echo $keywords; ?>" data-copy-text="<?php echo $keywords; ?>">
+      <div class="copy-tooltip hidden absolute -top-[4px] left-0 bg-black/80 text-white rounded text-center px-2 py-1" data-copy-text="<?php echo $keywords; ?>">Скопійовано 🙂</div>
+      <div class="mr-1"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="16px" fill="currentColor"><path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/></svg></div>  
+      <div><?php echo $keywords; ?></div>
+    </div>
+  </td>
+  <!-- END Keywords -->
+</tr>
             <?php endwhile; endif; wp_reset_postdata(); ?>
           </tbody>
         </table>
@@ -187,5 +281,82 @@ $current_user_id = get_current_user_id();
       </div>
     </div>
   </div>
+<div class="modal px-8 py-6" data-modal-id="modal-pay">
+  <div class="modal-content">
+    <div class="modal-box w-5/6 bg-white min-h-full rounded-lg p-4">
+      <div class="flex flex-wrap bg-gray-200 rounded-lg p-1 mb-2">
+        <div class="tab w-1/2 active" data-tab="authors">Автори</div>
+        <div class="tab w-1/2" data-tab="sites">Сайти</div>
+      </div>
+      <div class="tab-content" data-content="authors">
+        <table class="w-full text-sm">
+          <thead class="border-b border-gray-200 bg-black/80 text-gray-200 text-left">
+            <tr>
+              <th class="p-2">Автор</th>
+              <th class="p-2">Кількість статей</th>
+              <th class="p-2">Keywords</th>
+              <th class="p-2">Кліків</th>
+              <th class="p-2">Сторінок без показів</th>
+              <th class="p-2">Сторінок без keywords</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-300 border-b" id="stats-authors-tbody">
+            <?php $data = get_option('article_stats_cache', ['authors' => []]);
+            foreach ($data['authors'] as $author): ?>
+            <tr class="odd:bg-white even:bg-gray-100 border-b">
+              <td class="border-r border-l p-2"><?php echo $author['name']; ?></td>
+              <td class="border-r p-2"><?php echo $author['count']; ?></td>
+              <td class="border-r p-2"><?php echo $author['clicks']; ?></td>
+              <td class="border-r p-2"><?php echo $author['keywords']; ?></td>
+              <td class="border-r p-2"><?php echo $author['zero_views']; ?></td>
+              <td class="border-r p-2"><?php echo $author['zero_keywords']; ?></td>
+            </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-content hidden" data-content="sites">
+        <table class="w-full text-sm">
+          <thead class="border-b border-gray-200 bg-black/80 text-gray-200 text-left">
+            <tr>
+              <th class="p-2">Сайт</th>
+              <th class="p-2">Кількість статей</th>
+              <th class="p-2">Keywords</th>
+              <th class="p-2">Кліків</th>
+              <th class="p-2">Сторінок без показів</th>
+              <th class="p-2">Сторінок без keywords</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-300 border-b" id="stats-sites-tbody">
+            <?php $data = get_option('article_stats_cache', ['sites' => []]);
+            foreach ($data['sites'] as $site): ?>
+            <tr class="odd:bg-white even:bg-gray-100 border-b">
+              <td class="border-r border-l p-2"><?php echo $site['name']; ?></td>
+              <td class="border-r p-2"><?php echo $site['count']; ?></td>
+              <td class="border-r p-2"><?php echo $site['clicks']; ?></td>
+              <td class="border-r p-2"><?php echo $site['keywords']; ?></td>
+              <td class="border-r p-2"><?php echo $site['zero_views']; ?></td>
+              <td class="border-r p-2"><?php echo $site['zero_keywords']; ?></td>
+            </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex items-center justify-between gap-x-2 mt-4">
+        <div id="stats-last-update" class="text-sm text-right text-gray-500">
+          <?php 
+            $date_update = get_option("update_article_stats_date"); 
+            if ($date_update) { $update_d = date("d.m.Y", $date_update); echo $update_d; }
+          ?>
+        </div>
+        <div>
+          <div id="update-stats-btn" class="bg-emerald-500 rounded-md text-sm font-medium text-white cursor-pointer px-3 py-1.5">
+            Оновити дані
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <?php endif; ?>
 <?php get_footer(); ?>

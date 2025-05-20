@@ -62,7 +62,7 @@
     </div>
   </td>
   <!-- END Ahrefs -->
-  <!-- GST -->
+  <!-- GSC -->
   <td class="max-w-[165px] border-r whitespace-nowrap p-2">
     <div class="gap-y-2">
       <div class="flex items-center">
@@ -75,7 +75,7 @@
       </div>
     </div>
   </td>
-  <!-- END GST -->
+  <!-- END GSC -->
   <!-- Keywords -->
   <td class="p-2">
     <div class="max-w-[200px] flex items-center relative text-ellipsis overflow-hidden whitespace-nowrap cursor-pointer copy-click" data-clipboard-text="<?php echo $keywords; ?>" data-copy-text="<?php echo $keywords; ?>">

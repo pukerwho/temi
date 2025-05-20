@@ -441,4 +441,4 @@ function set_articles_to_draft_by_url() {
     }
   }
 }
-set_articles_to_draft_by_url();
+// set_articles_to_draft_by_url();

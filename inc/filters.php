@@ -1,46 +1,50 @@
 <?php
 function justread_filter_achive( $query ) {
   if ( !is_admin() && is_post_type_archive('articles') ) {
-    if (isset($_GET['article_site'])) {
-      if ( $_GET['article_site'] != 'All' ) {
-        $filter_article_site = array(
-          'key' => '_crb_article_site',
-          'value' => $_GET['article_site'],
-          'compare' => 'LIKE'
-        );  
-      }
+
+    $meta_query = ['relation' => 'AND'];
+
+    if (isset($_GET['article_site']) && $_GET['article_site'] !== 'All') {
+      $meta_query[] = array(
+        'key' => '_crb_article_site',
+        'value' => $_GET['article_site'],
+        'compare' => 'LIKE'
+      );
     }
-    if (isset($_GET['article_author'])) {
-      if ( $_GET['article_author'] != 'All') {
-        $filter_article_author = array(
-          'key' => '_crb_article_author',
-          'value' => $_GET['article_author'],
-          'compare' => 'LIKE'
-        );  
-      }
+
+    if (isset($_GET['article_author']) && $_GET['article_author'] !== 'All') {
+      $meta_query[] = array(
+        'key' => '_crb_article_author',
+        'value' => $_GET['article_author'],
+        'compare' => 'LIKE'
+      );
     }
+
+    if (!empty($_GET['s'])) {
+      $search_term = sanitize_text_field($_GET['s']);
+      // $search_term = str_replace(['“', '”', '‘', '’', '–', '—', '―'], ['"', '"', "'", "'", '-', '-', '-'], $search_term);
     
-    if (isset($_GET['article_orderby'])) {
-      if ( $_GET['article_orderby'] != 'All') {
-        $filter_article_orderby = $_GET['article_orderby'];
-      }
+      // Пошук і в title, і в ключових словах
+      $meta_query[] = array(
+        
+        array(
+          'key' => '_crb_article_keywords',
+          'value' => $search_term,
+          'compare' => 'LIKE',
+        ),
+      );
+      // $query->set('s', $search_term);
     }
-    if (isset($_GET['article_perpage'])) {
-      $filter_article_perpage = $_GET['article_perpage'];
-    } else {
-      $filter_article_perpage = 20;
+
+    $query->set('meta_query', $meta_query);
+
+    if (isset($_GET['article_orderby']) && $_GET['article_orderby'] !== 'All') {
+      $query->set('meta_key', $_GET['article_orderby']);
+      $query->set('orderby', 'meta_value_num');
     }
-    $query->set('meta_query',  array(
-      'relation' => 'AND',
-      array(
-        'relation' => 'AND',
-        $filter_article_site,
-        $filter_article_author,
-      )
-    ));
-    $query->set('meta_key', $filter_article_orderby);
-    $query->set('orderby', 'meta_value_num');
-    $query->set('posts_per_page', $filter_article_perpage);
+
+    $query->set('posts_per_page', isset($_GET['article_perpage']) ? (int)$_GET['article_perpage'] : 20);
+
     clear_articles_cache();
     return $query;
   }

@@ -442,3 +442,43 @@ function set_articles_to_draft_by_url() {
   }
 }
 // set_articles_to_draft_by_url();
+
+// 
+add_action('pre_get_posts', function($query) {
+  if (
+    !is_admin() &&
+    $query->is_main_query() &&
+    isset($_GET['s']) &&
+    is_search()
+  ) {
+    $query->set('post_type', 'articles');
+    // Опційно: можна очистити is_search(), щоб завантажився archive-articles.php
+    $query->is_search = false;
+    $query->is_archive = true;
+  }
+});
+
+function sync_article_titles_to_meta() {
+  $args = array(
+    'post_type'      => 'articles',
+    'posts_per_page' => -1,
+    'post_status'    => 'any',
+    'fields'         => 'ids',
+  );
+
+  $article_ids = get_posts($args);
+
+  foreach ($article_ids as $post_id) {
+    $title = get_the_title($post_id);
+    update_post_meta($post_id, '_crb_article_title', $title);
+  }
+
+  echo '✅ Заголовки синхронізовано.';
+}
+
+add_action('init', function() {
+  if (current_user_can('administrator') && isset($_GET['sync_titles']) && $_GET['sync_titles'] === '1') {
+    sync_article_titles_to_meta();
+    exit;
+  }
+});

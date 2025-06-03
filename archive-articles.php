@@ -3,6 +3,7 @@ get_header();
 $current_user_id = get_current_user_id();
 $is_admin = ($current_user_id == '1');
 $is_quest = ($current_user_id == '15');
+// $is_quest = ($current_user_id == '3');
 ?>
 
 <?php if ($is_admin || $is_quest): ?>

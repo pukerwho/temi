@@ -18,22 +18,34 @@
   <!-- END Назва статті -->
   <!-- Keywords -->
   <td class="border-r whitespace-nowrap p-2">
-    <?php echo carbon_get_the_post_meta('crb_article_ahrefs'); ?>
+    <div class="flex items-center">
+      <div class="w-[9px] h-[9px] bg-orange-300 rounded-full mr-1"></div>
+      <div><?php echo carbon_get_the_post_meta('crb_article_ahrefs'); ?></div>
+    </div>
   </td>
   <!-- END Keywords -->
   <!-- Ahrefs Traffic -->
   <td class="border-r whitespace-nowrap p-2">
-    <?php echo carbon_get_the_post_meta('crb_article_ahrefs_traffic'); ?>
+    <div class="flex items-center">
+      <div class="w-[9px] h-[9px] bg-yellow-300 rounded-full mr-1"></div>
+      <div><?php echo carbon_get_the_post_meta('crb_article_ahrefs_traffic'); ?></div>
+    </div>
   </td>
   <!-- END Ahrefs Traffic -->
   <!-- Кліки -->
   <td class="border-r whitespace-nowrap p-2">
-    <?php echo carbon_get_the_post_meta('crb_article_google_click'); ?>
+    <div class="flex items-center">
+      <div class="w-[9px] h-[9px] bg-sky-300 rounded-full mr-1"></div>
+      <div><?php echo carbon_get_the_post_meta('crb_article_google_click'); ?></div>
+    </div>
   </td>
   <!-- END Кліки -->
   <!-- Покази -->
   <td class="border-r whitespace-nowrap p-2">
-    <?php echo carbon_get_the_post_meta('crb_article_google_views'); ?>
+    <div class="flex items-center">
+      <div class="w-[9px] h-[9px] bg-purple-300 rounded-full mr-1"></div>
+      <div><?php echo carbon_get_the_post_meta('crb_article_google_views'); ?></div>
+    </div>
   </td>
   <!-- END Покази -->
   <!-- Keywords -->

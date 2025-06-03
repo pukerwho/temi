@@ -482,3 +482,19 @@ function sync_article_titles_to_meta() {
 //     exit;
 //   }
 // });
+
+add_action('template_redirect', 'restrict_frontend_access_by_user_fixed');
+function restrict_frontend_access_by_user_fixed() {
+    if (!is_user_logged_in()) return;
+
+    $user_id = get_current_user_id();
+    $current_uri = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+
+    if ($user_id == 15) {
+      $allowed = array('/articles');
+      if (!in_array($current_uri, $allowed)) {
+        wp_redirect(home_url('/articles'));
+        exit;
+      }
+    }
+}

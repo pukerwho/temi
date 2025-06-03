@@ -476,9 +476,9 @@ function sync_article_titles_to_meta() {
   echo '✅ Заголовки синхронізовано.';
 }
 
-add_action('init', function() {
-  if (current_user_can('administrator') && isset($_GET['sync_titles']) && $_GET['sync_titles'] === '1') {
-    sync_article_titles_to_meta();
-    exit;
-  }
-});
+// add_action('init', function() {
+//   if (current_user_can('administrator') && isset($_GET['sync_titles']) && $_GET['sync_titles'] === '1') {
+//     sync_article_titles_to_meta();
+//     exit;
+//   }
+// });

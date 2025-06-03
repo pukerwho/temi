@@ -26,9 +26,14 @@ function justread_filter_achive( $query ) {
     
       // Пошук і в title, і в ключових словах
       $meta_query[] = array(
-        
+        'relation' => 'OR',
         array(
           'key' => '_crb_article_keywords',
+          'value' => $search_term,
+          'compare' => 'LIKE',
+        ),
+        array(
+          'key' => '_crb_article_title',
           'value' => $search_term,
           'compare' => 'LIKE',
         ),

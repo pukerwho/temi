@@ -19,14 +19,23 @@
       </div>
       <div class="text-gray-600 text-xs">
         <?php 
-        $date = carbon_get_the_post_meta('crb_article_date'); 
-        
-        if ($date) {
-          // $date = strtotime($date);
-          $date = date("d.m.Y", $date);
-        }
-        echo $date;
+          $date = carbon_get_the_post_meta('crb_article_date'); 
+
+          if ($date) {
+              // Якщо збережено як рядок дати - конвертуємо в timestamp
+              $timestamp = is_numeric($date) ? (int) $date : strtotime($date);
+
+              if ($timestamp) {
+                  $date = date("d.m.Y", $timestamp);
+              } else {
+                  // на випадок, якщо strtotime не зміг розпарсити
+                  $date = '';
+              }
+          }
+
+          echo $date;
         ?>
+
       </div>
     </div>
   </td>

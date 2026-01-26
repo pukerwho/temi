@@ -1,8 +1,9 @@
-<?php 
-get_header(); 
+<?php
+get_header();
 $current_user_id = get_current_user_id();
-$is_admin = ($current_user_id == '1');
-$is_quest = ($current_user_id == '15');
+$is_admin = $current_user_id == '1';
+$is_quest = $current_user_id == '15';
+
 // $is_quest = ($current_user_id == '2');
 ?>
 
@@ -13,7 +14,9 @@ $is_quest = ($current_user_id == '15');
       <div class="flex items-center justify-between border-b p-4">
         <div class="flex items-center gap-x-2">
           <div>
-            <div class="text-sm font-medium">Оновлено: <span class="font-bold"><?php echo carbon_get_theme_option('crb_last_update'); ?></span></div>
+            <div class="text-sm font-medium">Оновлено: <span class="font-bold"><?php echo carbon_get_theme_option(
+                'crb_last_update'
+            ); ?></span></div>
             <div class="hidden ml-auto items-center gap-2 rounded-md bg-blue-500 px-3 py-1.5 text-sm font-medium text-white cursor-pointer hover:bg-blue-600">Додати</div>
           </div>
         </div>
@@ -51,7 +54,11 @@ $is_quest = ($current_user_id == '15');
         <div class="w-full flex items-center justify-between py-2 px-2 space-x-4">
           <div class="flex items-center">
             <div>
-              <input type="text" id="" name="s" value="<?php echo isset($_GET['s']) ? esc_attr($_GET['s']) : ''; ?>" placeholder="Пошук" class="w-full border border-gray-300 rounded-lg px-2 py-1" />
+              <input type="text" id="" name="s" value="<?php echo isset(
+                  $_GET['s']
+              )
+                  ? esc_attr($_GET['s'])
+                  : ''; ?>" placeholder="Пошук" class="w-full border border-gray-300 rounded-lg px-2 py-1" />
             </div>
             <div class="flex items-center justify-between gap-2">
               <div class="min-w-[25%] flex items-center gap-2 px-3 py-1.5 text-sm font-medium border-r">
@@ -60,13 +67,65 @@ $is_quest = ($current_user_id == '15');
                 </svg>
                 <select id="site-select" class="site-select" name="article_site">
                   <option value="All" >Оберіть сайт</option>
-                  <?php 
-                  $article_site = !empty( $_GET['article_site'] ) ? $_GET['article_site'] : '';
-                  $all_sites = ["treba-solutions.com","webgolovolomki.com","icatalog.pro","tarakan.org.ua","sdamkvartiry.com","priazovka.com","d-art.org.ua","armadio.net.ua","book-cook.net", "bfb.org.ua", "odysseus.com.ua", "santmat.net.ua", "freeapp.com.ua", "sviato.top", "alekseev.com.ua", "bepretty.in.ua", "ortstom.in.ua", "merkury.com.ua", "stp-press.info", "vrudenko.org.ua", "tsystem.com.ua", "mikst.org.ua", "kryazh.com.ua", "howlonglive.com", "nikeairmaxltdus.com", "marisam.com.ua", "wunder2.com.ua", "wcdt.com.ua", "investif.in.ua", "m-cg.com.ua", "rahlina.com.ua", "quarium.org.ua","izn.com.ua","diagtor.com.ua","wp.org.ua","pref.org.ua","gt.org.ua","beeforum.org.ua"];
-                  foreach ($all_sites as $site):
+                  <?php
+                  $article_site = !empty($_GET['article_site'])
+                      ? $_GET['article_site']
+                      : '';
+                  $all_sites = [
+                      'treba-solutions.com',
+                      'webgolovolomki.com',
+                      'icatalog.pro',
+                      'tarakan.org.ua',
+                      'sdamkvartiry.com',
+                      'priazovka.com',
+                      'bepretty.in.ua',
+                      'bfb.org.ua',
+                      'd-art.org.ua',
+                      'wunder2.com.ua',
+                      'armadio.net.ua',
+                      'book-cook.net',
+                      'odysseus.com.ua',
+                      'freeapp.com.ua',
+                      'santmat.net.ua',
+                      'merkury.com.ua',
+                      'sviato.top',
+                      'alekseev.com.ua',
+                      'tsystem.com.ua',
+                      'ortstom.in.ua',
+                      'mikst.org.ua',
+                      'kryazh.com.ua',
+                      'marisam.com.ua',
+                      'stp-press.info',
+                      'investif.in.ua',
+                      'vrudenko.org.ua',
+                      'quarium.org.ua',
+                      'wcdt.com.ua',
+                      'm-cg.com.ua',
+                      'rahlina.com.ua',
+                      'usap.org.ua',
+                      'izn.com.ua',
+                      'diagtor.com.ua',
+                      'pref.org.ua',
+                      'beeforum.org.ua',
+                      'internet-marketing.in.ua',
+                      'wp.org.ua',
+                      'infotrust.com.ua',
+                      'dky.org.ua',
+                      'faktologiya.com.ua',
+                      'faktyhub.org.ua',
+                      'inw.com.ua',
+                      'newsdoc.com.ua',
+                      'instruktorium.org.ua',
+                      'ukq.com.ua',
+                      'yakzrobyty.com.ua',
+                  ];
+                  foreach ($all_sites as $site): ?>
+                    <option value="<?php echo $site; ?>" <?php echo $article_site ==
+$site
+    ? 'selected'
+    : ''; ?>><?php echo $site; ?></option>
+                  <?php endforeach;
                   ?>
-                    <option value="<?php echo $site; ?>" <?php echo $article_site == $site ? 'selected' : ''; ?>><?php echo $site; ?></option>
-                  <?php endforeach; ?>
                 </select>
               </div>
               <div class="min-w-[25%] flex items-center gap-2 px-3 py-1.5 text-sm font-medium border-r">
@@ -75,13 +134,30 @@ $is_quest = ($current_user_id == '15');
                 </svg>
                 <select id="author-select" class="author-select" name="article_author" data-select-id="<?php echo $current_id; ?>">
                   <option value="All">Оберіть автора</option>
-                  <?php 
-                  $article_author = !empty( $_GET['article_author'] ) ? $_GET['article_author'] : '';
-                  $all_authors = ["Ана-Катаріна Кузмицька","Каріна Туленіна","Анастасія Можаровська","Єлизавета Будас","Валерія Ліпська","Єсенія Буксіна","Віталій Татьянко","Марія Мигаль","Тетяна Ковальчук","Альона Громова","Ольга Славіковська"];
-                  foreach ($all_authors as $author):
+                  <?php
+                  $article_author = !empty($_GET['article_author'])
+                      ? $_GET['article_author']
+                      : '';
+                  $all_authors = [
+                      'Ана-Катаріна Кузмицька',
+                      'Каріна Туленіна',
+                      'Анастасія Можаровська',
+                      'Єлизавета Будас',
+                      'Валерія Ліпська',
+                      'Єсенія Буксіна',
+                      'Віталій Татьянко',
+                      'Марія Мигаль',
+                      'Тетяна Ковальчук',
+                      'Альона Громова',
+                      'Ольга Славіковська',
+                  ];
+                  foreach ($all_authors as $author): ?>
+                    <option value="<?php echo $author; ?>" <?php echo $article_author ==
+$author
+    ? 'selected'
+    : ''; ?>><?php echo $author; ?></option>
+                  <?php endforeach;
                   ?>
-                    <option value="<?php echo $author; ?>" <?php echo $article_author == $author ? 'selected' : ''; ?>><?php echo $author; ?></option>
-                  <?php endforeach; ?>
                 </select>
               </div>
                 
@@ -89,60 +165,72 @@ $is_quest = ($current_user_id == '15');
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" /></svg>  
                 <select id="orderby-select" class="orderby-select" name="article_orderby" data-select-id="<?php echo $current_id; ?>">
                   <option value="All">Відсортувати по</option>
-                  <?php 
-                  $article_orderby = !empty( $_GET['article_orderby'] ) ? $_GET['article_orderby'] : '';
+                  <?php
+                  $article_orderby = !empty($_GET['article_orderby'])
+                      ? $_GET['article_orderby']
+                      : '';
                   $all_orderby = [
-                    [
-                      "name" => "По keywords",
-                      "key" => "_crb_article_ahrefs",
-                    ],
-                    [
-                      "name" => "По traffic",
-                      "key" => "_crb_article_ahrefs_traffic",
-                    ],
-                    [
-                      "name" => "По клікам",
-                      "key" => "_crb_article_google_click",
-                    ],
-                    [
-                      "name" => "По показам",
-                      "key" => "_crb_article_google_views",
-                    ]
+                      [
+                          'name' => 'По keywords',
+                          'key' => '_crb_article_ahrefs',
+                      ],
+                      [
+                          'name' => 'По traffic',
+                          'key' => '_crb_article_ahrefs_traffic',
+                      ],
+                      [
+                          'name' => 'По клікам',
+                          'key' => '_crb_article_google_click',
+                      ],
+                      [
+                          'name' => 'По показам',
+                          'key' => '_crb_article_google_views',
+                      ],
                   ];
-                  foreach ($all_orderby as $orderby):
+                  foreach ($all_orderby as $orderby): ?>
+                    <option value="<?php echo $orderby[
+                        'key'
+                    ]; ?>" <?php echo $article_orderby == $orderby['key']
+    ? 'selected'
+    : ''; ?>><?php echo $orderby['name']; ?></option>
+                  <?php endforeach;
                   ?>
-                    <option value="<?php echo $orderby["key"]; ?>" <?php echo $article_orderby == $orderby["key"] ? 'selected' : ''; ?>><?php echo $orderby["name"]; ?></option>
-                  <?php endforeach; ?>
                 </select>
               </div>
               <div class="min-w-[25%] flex items-center gap-2 px-3 py-1.5 text-sm font-medium border-r">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" /></svg>
                 <select id="perpage-select" class="perpage-select" name="article_perpage" data-select-id="<?php echo $current_id; ?>">
                   <option value="20">Відображати</option>
-                  <?php 
-                  $article_perpage = !empty( $_GET['article_perpage'] ) ? $_GET['article_perpage'] : '';
+                  <?php
+                  $article_perpage = !empty($_GET['article_perpage'])
+                      ? $_GET['article_perpage']
+                      : '';
                   $all_perpage = [
-                    [
-                      "name" => "По 20 на сторінку",
-                      "key" => 20,
-                    ],
-                    [
-                      "name" => "По 50 на сторінку",
-                      "key" => 50,
-                    ],
-                    [
-                      "name" => "По 100 на сторінку",
-                      "key" => 100,
-                    ],
-                    [
-                      "name" => "Всі статті",
-                      "key" => -1,
-                    ]
+                      [
+                          'name' => 'По 20 на сторінку',
+                          'key' => 20,
+                      ],
+                      [
+                          'name' => 'По 50 на сторінку',
+                          'key' => 50,
+                      ],
+                      [
+                          'name' => 'По 100 на сторінку',
+                          'key' => 100,
+                      ],
+                      [
+                          'name' => 'Всі статті',
+                          'key' => -1,
+                      ],
                   ];
-                  foreach ($all_perpage as $perpage):
+                  foreach ($all_perpage as $perpage): ?>
+                    <option value="<?php echo $perpage[
+                        'key'
+                    ]; ?>" <?php echo $article_perpage == $perpage['key']
+    ? 'selected'
+    : ''; ?>><?php echo $perpage['name']; ?></option>
+                  <?php endforeach;
                   ?>
-                    <option value="<?php echo $perpage["key"]; ?>" <?php echo $article_perpage == $perpage["key"] ? 'selected' : ''; ?>><?php echo $perpage["name"]; ?></option>
-                  <?php endforeach; ?>
                 </select>
               </div>
             </div>
@@ -176,21 +264,41 @@ $is_quest = ($current_user_id == '15');
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-300 border-b" id="stats-authors-tbody">
-            <?php $data = get_option('article_stats_cache', ['authors' => []]);
+            <?php
+            $data = get_option('article_stats_cache', ['authors' => []]);
             foreach ($data['authors'] as $author): ?>
-            <?php 
-            $author_zero_views_percentage = ($author['zero_views']/$author['count'])*100;
-            $author_zero_keywords_percentage = ($author['zero_keywords']/$author['count'])*100;
+            <?php
+            $author_zero_views_percentage =
+                ($author['zero_views'] / $author['count']) * 100;
+            $author_zero_keywords_percentage =
+                ($author['zero_keywords'] / $author['count']) * 100;
             ?>
             <tr class="odd:bg-white even:bg-gray-100 border-b">
-              <td class="border-r border-l p-2"><span class="data-sort-prott"><?php echo $author['name']; ?></span></td>
-              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $author['count']; ?></span></td>
-              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $author['keywords']; ?></span></td>
-              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $author['clicks']; ?></span></td>
-              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $author['zero_views']; ?></span> або <?php echo intval($author_zero_views_percentage); ?>%</td>
-              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $author['zero_keywords']; ?></span> або <?php echo intval($author_zero_keywords_percentage); ?>%</td>
+              <td class="border-r border-l p-2"><span class="data-sort-prott"><?php echo $author[
+                  'name'
+              ]; ?></span></td>
+              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $author[
+                  'count'
+              ]; ?></span></td>
+              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $author[
+                  'keywords'
+              ]; ?></span></td>
+              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $author[
+                  'clicks'
+              ]; ?></span></td>
+              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $author[
+                  'zero_views'
+              ]; ?></span> або <?php echo intval(
+    $author_zero_views_percentage
+); ?>%</td>
+              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $author[
+                  'zero_keywords'
+              ]; ?></span> або <?php echo intval(
+    $author_zero_keywords_percentage
+); ?>%</td>
             </tr>
-            <?php endforeach; ?>
+            <?php endforeach;
+            ?>
           </tbody>
         </table>
       </div>
@@ -207,29 +315,52 @@ $is_quest = ($current_user_id == '15');
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-300 border-b" id="stats-sites-tbody">
-            <?php $data = get_option('article_stats_cache', ['sites' => []]);
+            <?php
+            $data = get_option('article_stats_cache', ['sites' => []]);
             foreach ($data['sites'] as $site): ?>
-            <?php 
-            $site_zero_views_percentage = ($site['zero_views']/$site['count'])*100;
-            $site_zero_keywords_percentage = ($site['zero_keywords']/$site['count'])*100;
+            <?php
+            $site_zero_views_percentage =
+                ($site['zero_views'] / $site['count']) * 100;
+            $site_zero_keywords_percentage =
+                ($site['zero_keywords'] / $site['count']) * 100;
             ?>
             <tr class="odd:bg-white even:bg-gray-100 border-b">
-              <td class="border-r border-l p-2"><span class="data-sort-prott"><?php echo $site['name']; ?></span></td>
-              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $site['count']; ?></span></td>
-              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $site['keywords']; ?></span></td>
-              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $site['clicks']; ?></span></td>
-              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $site['zero_views']; ?></span> або <?php echo intval($site_zero_views_percentage); ?>%</td>
-              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $site['zero_keywords']; ?></span> або <?php echo intval($site_zero_keywords_percentage); ?>%</td>
+              <td class="border-r border-l p-2"><span class="data-sort-prott"><?php echo $site[
+                  'name'
+              ]; ?></span></td>
+              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $site[
+                  'count'
+              ]; ?></span></td>
+              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $site[
+                  'keywords'
+              ]; ?></span></td>
+              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $site[
+                  'clicks'
+              ]; ?></span></td>
+              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $site[
+                  'zero_views'
+              ]; ?></span> або <?php echo intval(
+    $site_zero_views_percentage
+); ?>%</td>
+              <td class="border-r p-2"><span class="data-sort-prott"><?php echo $site[
+                  'zero_keywords'
+              ]; ?></span> або <?php echo intval(
+    $site_zero_keywords_percentage
+); ?>%</td>
             </tr>
-            <?php endforeach; ?>
+            <?php endforeach;
+            ?>
           </tbody>
         </table>
       </div>
       <div class="flex items-center justify-between gap-x-2 mt-4">
         <div id="stats-last-update" class="text-sm text-right text-gray-500">
-          <?php 
-            $date_update = get_option("update_article_stats_date"); 
-            if ($date_update) { $update_d = date("d.m.Y", $date_update); echo $update_d; }
+          <?php
+          $date_update = get_option('update_article_stats_date');
+          if ($date_update) {
+              $update_d = date('d.m.Y', $date_update);
+              echo $update_d;
+          }
           ?>
         </div>
         <div>

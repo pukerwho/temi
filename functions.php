@@ -134,6 +134,16 @@ function tarakan_scripts()
         true
     );
 
+    if (is_post_type_archive('articles')) {
+        wp_enqueue_script(
+            'articles-export',
+            get_template_directory_uri() . '/build/export-articles.js',
+            [],
+            null,
+            true
+        );
+    }
+
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }

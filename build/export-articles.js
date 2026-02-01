@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function () {
       var headerRow = Array.prototype.map.call(headerCells, function (cell) {
         return escapeCsvValue(cell.innerText || cell.textContent);
       });
+      // Додаємо нові заголовки
+      headerRow.push(escapeCsvValue('Дата'));
+      headerRow.push(escapeCsvValue('Посилання'));
       rows.push(headerRow.join(','));
     }
 
@@ -53,6 +56,17 @@ document.addEventListener('DOMContentLoaded', function () {
       var rowValues = Array.prototype.map.call(cells, function (cell) {
         return escapeCsvValue(cell.innerText || cell.textContent);
       });
+
+      // Витягуємо дату
+      var dateElem = row.querySelector('.article_date');
+      var dateValue = dateElem ? dateElem.innerText || dateElem.textContent : '';
+      rowValues.push(escapeCsvValue(dateValue));
+
+      // Витягуємо посилання
+      var linkElem = row.querySelector('.article_link');
+      var linkValue = linkElem ? linkElem.getAttribute('href') : '';
+      rowValues.push(escapeCsvValue(linkValue));
+
       rows.push(rowValues.join(','));
     });
 

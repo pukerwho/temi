@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (value === null || value === undefined) {
       return '';
     }
+    // Видаляємо зайві пробіли, переноси рядків та спеціальні символи, які можуть заважати
     return String(value).replace(/\s+/g, ' ').trim();
   }
 
@@ -61,39 +62,39 @@ document.addEventListener('DOMContentLoaded', function () {
       var rowData = [];
       var cells = row.querySelectorAll('td');
 
-      // 1. Назва статті (тільки з класу .article_title)
+      // 1. Назва статті
       var titleElem = row.querySelector('.article_title');
-      rowData.push(titleElem ? titleElem.innerText || titleElem.textContent : '');
+      rowData.push(titleElem ? titleElem.textContent || titleElem.innerText : '');
 
       // 2. Дата
       var dateElem = row.querySelector('.article_date');
-      rowData.push(dateElem ? dateElem.innerText || dateElem.textContent : '');
+      rowData.push(dateElem ? dateElem.textContent || dateElem.innerText : '');
 
-      // 3. Автор (2-й стовпчик в оригінальній таблиці)
-      rowData.push(cells[1] ? cells[1].innerText || cells[1].textContent : '');
+      // 3. Автор
+      rowData.push(cells[1] ? cells[1].textContent || cells[1].innerText : '');
 
-      // 4. Сайт (3-й стовпчик)
-      rowData.push(cells[2] ? cells[2].innerText || cells[2].textContent : '');
+      // 4. Сайт
+      rowData.push(cells[2] ? cells[2].textContent || cells[2].innerText : '');
 
       // 5. Ahrefs Keywords
       var ahrefsKeywordsElem = row.querySelector('.article_ahrefs_keywords');
-      rowData.push(ahrefsKeywordsElem ? ahrefsKeywordsElem.innerText || ahrefsKeywordsElem.textContent : '');
+      rowData.push(ahrefsKeywordsElem ? ahrefsKeywordsElem.textContent || ahrefsKeywordsElem.innerText : '');
 
       // 6. Ahrefs Traffic
       var ahrefsTrafficElem = row.querySelector('.article_ahrefs_traffic');
-      rowData.push(ahrefsTrafficElem ? ahrefsTrafficElem.innerText || ahrefsTrafficElem.textContent : '');
+      rowData.push(ahrefsTrafficElem ? ahrefsTrafficElem.textContent || ahrefsTrafficElem.innerText : '');
 
       // 7. Кліки
       var clicksElem = row.querySelector('.article_google_click');
-      rowData.push(clicksElem ? clicksElem.innerText || clicksElem.textContent : '');
+      rowData.push(clicksElem ? clicksElem.textContent || clicksElem.innerText : '');
 
       // 8. Покази
       var viewsElem = row.querySelector('.article_google_views');
-      rowData.push(viewsElem ? viewsElem.innerText || viewsElem.textContent : '');
+      rowData.push(viewsElem ? viewsElem.textContent || viewsElem.innerText : '');
 
-      // 9. Ключові фрази (останній стовпчик td)
+      // 9. Ключові фрази
       var keywordsElem = cells[cells.length - 1];
-      rowData.push(keywordsElem ? keywordsElem.innerText || keywordsElem.textContent : '');
+      rowData.push(keywordsElem ? keywordsElem.textContent || keywordsElem.innerText : '');
 
       // 10. Посилання
       var linkElem = row.querySelector('.article_link');
@@ -106,7 +107,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function downloadCsv(csvContent) {
-    var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    // Використовуємо BOM для коректного відображення кирилиці в Excel
+    var BOM = '\uFEFF';
+    var blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8;' });
     var url = URL.createObjectURL(blob);
     var link = document.createElement('a');
     var now = new Date();

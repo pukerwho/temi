@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
       rowData.push(viewsElem ? viewsElem.textContent || viewsElem.innerText : '');
 
       // 9. Ключові фрази
-      var keywordsElem = cells[cells.length - 1];
+      var keywordsElem = row.querySelector('.article_keywords');
       rowData.push(keywordsElem ? keywordsElem.textContent || keywordsElem.innerText : '');
 
       // 10. Посилання

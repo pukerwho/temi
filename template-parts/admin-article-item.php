@@ -70,13 +70,13 @@ $title = get_the_title();
     <div class="gap-y-2">
       <div class="flex items-center">
         <div class="w-[9px] h-[9px] bg-orange-300 rounded-full mr-1"></div>
-        <div class="text-xs mr-2"><?php echo carbon_get_the_post_meta(
+        <div class="article_ahrefs_keywords text-xs mr-2"><?php echo carbon_get_the_post_meta(
             'crb_article_ahrefs'
         ); ?></div>
       </div>
       <div class="flex items-center">
         <div class="w-[9px] h-[9px] bg-yellow-300 rounded-full mr-1"></div>
-        <div class="text-xs"><?php echo carbon_get_the_post_meta(
+        <div class="article_ahrefs_traffic text-xs"><?php echo carbon_get_the_post_meta(
             'crb_article_ahrefs_traffic'
         ); ?></div>
       </div>
@@ -88,13 +88,13 @@ $title = get_the_title();
     <div class="gap-y-2">
       <div class="flex items-center">
         <div class="w-[9px] h-[9px] bg-sky-300 rounded-full mr-1"></div>
-        <div class="text-xs mr-2"><?php echo carbon_get_the_post_meta(
+        <div class="article_google_click text-xs mr-2"><?php echo carbon_get_the_post_meta(
             'crb_article_google_click'
         ); ?></div>
       </div>
       <div class="flex items-center">
         <div class="w-[9px] h-[9px] bg-purple-300 rounded-full mr-1"></div>
-        <div class="text-xs"><?php echo carbon_get_the_post_meta(
+        <div class="article_google_views text-xs"><?php echo carbon_get_the_post_meta(
             'crb_article_google_views'
         ); ?></div>
       </div>

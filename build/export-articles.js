@@ -43,8 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
       'Дата',
       'Автор',
       'Сайт',
-      'Ahrefs',
-      'GSC',
+      'Ahrefs Keywords',
+      'Ahrefs Traffic',
+      'Кліки',
+      'Покази',
       'Ключові фрази',
       'Посилання'
     ];
@@ -73,16 +75,27 @@ document.addEventListener('DOMContentLoaded', function () {
       // 4. Сайт (3-й стовпчик)
       rowData.push(cells[2] ? cells[2].innerText || cells[2].textContent : '');
 
-      // 5. Ahrefs (4-й стовпчик)
-      rowData.push(cells[3] ? cells[3].innerText || cells[3].textContent : '');
+      // 5. Ahrefs Keywords
+      var ahrefsKeywordsElem = row.querySelector('.article_ahrefs_keywords');
+      rowData.push(ahrefsKeywordsElem ? ahrefsKeywordsElem.innerText || ahrefsKeywordsElem.textContent : '');
 
-      // 6. GSC (5-й стовпчик)
-      rowData.push(cells[4] ? cells[4].innerText || cells[4].textContent : '');
+      // 6. Ahrefs Traffic
+      var ahrefsTrafficElem = row.querySelector('.article_ahrefs_traffic');
+      rowData.push(ahrefsTrafficElem ? ahrefsTrafficElem.innerText || ahrefsTrafficElem.textContent : '');
 
-      // 7. Ключові фрази (6-й стовпчик)
-      rowData.push(cells[5] ? cells[5].innerText || cells[5].textContent : '');
+      // 7. Кліки
+      var clicksElem = row.querySelector('.article_google_click');
+      rowData.push(clicksElem ? clicksElem.innerText || clicksElem.textContent : '');
 
-      // 8. Посилання
+      // 8. Покази
+      var viewsElem = row.querySelector('.article_google_views');
+      rowData.push(viewsElem ? viewsElem.innerText || viewsElem.textContent : '');
+
+      // 9. Ключові фрази (останній стовпчик td)
+      var keywordsElem = cells[cells.length - 1];
+      rowData.push(keywordsElem ? keywordsElem.innerText || keywordsElem.textContent : '');
+
+      // 10. Посилання
       var linkElem = row.querySelector('.article_link');
       rowData.push(linkElem ? linkElem.getAttribute('href') : '');
 

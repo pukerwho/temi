@@ -36,38 +36,57 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function buildCsvFromTable(table) {
     var rows = [];
-    var headerCells = table.querySelectorAll('thead th');
-    if (headerCells.length) {
-      var headerRow = Array.prototype.map.call(headerCells, function (cell) {
-        return escapeCsvValue(cell.innerText || cell.textContent);
-      });
-      // Додаємо нові заголовки
-      headerRow.push(escapeCsvValue('Дата'));
-      headerRow.push(escapeCsvValue('Посилання'));
-      rows.push(headerRow.join(','));
-    }
+    
+    // Визначений порядок заголовків
+    var headers = [
+      'Назва статті',
+      'Дата',
+      'Автор',
+      'Сайт',
+      'Ahrefs',
+      'GSC',
+      'Ключові фрази',
+      'Посилання'
+    ];
+    rows.push(headers.map(escapeCsvValue).join(','));
 
     var bodyRows = table.querySelectorAll('tbody tr');
     Array.prototype.forEach.call(bodyRows, function (row) {
       if (!isVisibleRow(row)) {
         return;
       }
-      var cells = row.querySelectorAll('td, th');
-      var rowValues = Array.prototype.map.call(cells, function (cell) {
-        return escapeCsvValue(cell.innerText || cell.textContent);
-      });
+      
+      var rowData = [];
+      var cells = row.querySelectorAll('td');
 
-      // Витягуємо дату
+      // 1. Назва статті (тільки з класу .article_title)
+      var titleElem = row.querySelector('.article_title');
+      rowData.push(titleElem ? titleElem.innerText || titleElem.textContent : '');
+
+      // 2. Дата
       var dateElem = row.querySelector('.article_date');
-      var dateValue = dateElem ? dateElem.innerText || dateElem.textContent : '';
-      rowValues.push(escapeCsvValue(dateValue));
+      rowData.push(dateElem ? dateElem.innerText || dateElem.textContent : '');
 
-      // Витягуємо посилання
+      // 3. Автор (2-й стовпчик в оригінальній таблиці)
+      rowData.push(cells[1] ? cells[1].innerText || cells[1].textContent : '');
+
+      // 4. Сайт (3-й стовпчик)
+      rowData.push(cells[2] ? cells[2].innerText || cells[2].textContent : '');
+
+      // 5. Ahrefs (4-й стовпчик)
+      rowData.push(cells[3] ? cells[3].innerText || cells[3].textContent : '');
+
+      // 6. GSC (5-й стовпчик)
+      rowData.push(cells[4] ? cells[4].innerText || cells[4].textContent : '');
+
+      // 7. Ключові фрази (6-й стовпчик)
+      rowData.push(cells[5] ? cells[5].innerText || cells[5].textContent : '');
+
+      // 8. Посилання
       var linkElem = row.querySelector('.article_link');
-      var linkValue = linkElem ? linkElem.getAttribute('href') : '';
-      rowValues.push(escapeCsvValue(linkValue));
+      rowData.push(linkElem ? linkElem.getAttribute('href') : '');
 
-      rows.push(rowValues.join(','));
+      rows.push(rowData.map(escapeCsvValue).join(','));
     });
 
     return rows.join('\r\n');
